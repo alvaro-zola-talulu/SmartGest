@@ -617,3 +617,16 @@ body {
     .support-section { margin: 60px auto; }
     .support-form-box { padding: 25px; }
 }
+
+/* Classe para o efeito Fade-in via clique do menu */
+.seccao-fade {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Quando a secção estiver ativa, ela aparece suavemente */
+.seccao-fade.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
