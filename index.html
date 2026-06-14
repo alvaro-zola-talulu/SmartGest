@@ -4,44 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMARTGEST - Login</title>
+    <title>SMARTGEST - Gestão Inteligente</title>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/welcome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-    <adiv id="login-screen" class="login-container">
-        <div class="login-box">
-            <div class="login-logo-container">
-                <img src="image/logotipo2_smartgest.svg" alt="Logótipo da Empresa" class="app-logo"
-                    onerror="this.style.display='none'; document.getElementById('fallback-login-logo').style.display='flex'">
-                <div id="fallback-login-logo" class="shop-illustration" style="display:none;">
-                    <div class="awning"></div>
-                    <div class="counter"><i class="fa-solid fa-store"></i></div>
+    <div class="welcome-wrapper animacao-entrada">
+        <main class="welcome-card">
+            
+            <header class="welcome-header">
+                <div class="welcome-logo-box">
+                    <img src="image/logo_smartgest2.svg" alt="Logo" class="welcome-logo" onerror="this.style.display='none'; document.getElementById('fallback-welcome-title').style.display='block'" style="width: 65px;">
+                    <h1 id="fallback-welcome-title" class="welcome-title-text">SMARTGEST</h1>
                 </div>
-            </div>
-            <form id="login-form" onsubmit="handleLogin(event)">
-                <p class="form-label">Entre com a sua conta</p>
-                <div class="input-group">
-                    <i class="fa-solid fa-user icon-input"></i>
-                    <input type="text" id="username" placeholder="Utilizador" required autocomplete="off">
+                <p class="welcome-tagline">Gestão Inteligente</p>
+            </header>
+
+            <section class="welcome-body">
+                <h2>O controlo do teu negócio, de forma simples e humana.</h2>
+                <p>
+                    Bem-vindo ao SmartGest. Uma plataforma integrada de gestão desenhada para simplificar os teus processos diários, automatizar vendas, controlar stock e monitorizar relatórios financeiros em tempo real.
+                </p>
+                
+                <div class="dev-credits">
+                    <p><i class="fa-solid fa-code text-blue"></i> Desenvolvido com foco em alta performance e usabilidade.</p>
                 </div>
-                <div class="input-group">
-                    <i class="fa-solid fa-lock icon-input"></i>
-                    <input type="password" id="password" placeholder="Palavra-passe" required>
-                    <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
-                </div>
-                <div id="error-message" class="error-msg hidden">
-                    <i class="fa-solid fa-circle-exclamation"></i> Utilizador ou palavra-passe incorretos!
-                </div>
-                <button type="submit" class="btn-login">ENTRAR</button>
-            </form>
-            <div class="login-footer">© 2026 Todos os direitos reservados para turma TGI12AT.</div>
-        </div>
+            </section>
+
+            <footer class="welcome-actions">
+                <a href="login.html" class="btn-welcome primary"><i class="fa-solid fa-right-to-bracket"></i> Iniciar Sessão</a>
+                <a href="cadastro.html" class="btn-welcome secondary"><i class="fa-solid fa-user-plus"></i> Criar Conta</a>
+            </footer>
+
+        </main>
     </div>
 
-    <script src="script/script.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTGEST - Login</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <adiv id="login-screen" class="login-container">
+        <div class="login-box">
+            <div class="login-logo-container">
+                <img src="image/logotipo2_smartgest.svg" alt="Logótipo da Empresa" class="app-logo"
+                    onerror="this.style.display='none'; document.getElementById('fallback-login-logo').style.display='flex'">
+                <div id="fallback-login-logo" class="shop-illustration" style="display:none;">
+                    <div class="awning"></div>
+                    <div class="counter"><i class="fa-solid fa-store"></i></div>
+                </div>
+            </div>
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <p class="form-label">Entre com a sua conta</p>
+                <div class="input-group">
+                    <i class="fa-solid fa-user icon-input"></i>
+                    <input type="text" id="username" placeholder="Utilizador" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock icon-input"></i>
+                    <input type="password" id="password" placeholder="Palavra-passe" required>
+                    <i class="fa-solid fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+                </div>
+                <div id="error-message" class="error-msg hidden">
+                    <i class="fa-solid fa-circle-exclamation"></i> Utilizador ou palavra-passe incorretos!
+                </div>
+                <button type="submit" class="btn-login">ENTRAR</button>
+            </form>
+            <div class="login-footer">© 2026 Todos os direitos reservados para turma TGI12AT.</div>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+</body>
+
+</html>
