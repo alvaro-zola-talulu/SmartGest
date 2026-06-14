@@ -13,7 +13,7 @@ body {
 
 /* Reutilização da tua animação original de entrada suave */
 .landing-page {
-    animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.9s ease-out;
 }
 
 @keyframes fadeIn {
