@@ -226,6 +226,98 @@
         </div>
     </section>
 
+    <!-- ==========================================================================
+         SECÇÃO DE SUPORTE & CONTACTO (Liga ao link #suporte do menu)
+         ========================================================================== -->
+    <section id="suporte" class="support-section">
+        <div class="section-header">
+            <h2>Precisa de Ajuda ou Suporte?</h2>
+            <p>Estamos aqui para garantir que a gestão do seu negócio nunca pare. Fale connosco!</p>
+        </div>
+
+        <div class="support-container">
+            <!-- Coluna da Esquerda: Canais Rápidos de Atendimento -->
+            <div class="support-info">
+                <h3>Canais de Atendimento</h3>
+                <p>Escolha a forma mais confortável para entrar em contacto com a nossa equipa técnica.</p>
+                
+                <div class="support-channels">
+                    <!-- Canal WhatsApp / Telemóvel -->
+                    <div class="channel-card">
+                        <div class="channel-icon text-green"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="channel-details">
+                            <h4>WhatsApp & Apoio</h4>
+                            <p>+244 9XX XXX XXX</p>
+                            <span>Segunda a Sexta, das 8h às 17h</span>
+                        </div>
+                    </div>
+
+                    <!-- Canal E-mail -->
+                    <div class="channel-card">
+                        <div class="channel-icon text-blue"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="channel-details">
+                            <h4>E-mail Institucional</h4>
+                            <p>suporte@smartgest.com</p>
+                            <span>Respondemos em até 24 horas úteis</span>
+                        </div>
+                    </div>
+
+                    <!-- Canal Localização / Turma -->
+                    <div class="channel-card">
+                        <div class="channel-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="channel-details">
+                            <h4>Desenvolvimento</h4>
+                            <p>Turma TGI12AT</p>
+                            <span>Projeto de Gestão Inteligente — 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna da Direita: Formulário de Mensagem Direta -->
+            <div class="support-form-box">
+                <h3>Envie-nos uma Mensagem</h3>
+                <form id="suporteForm" method="POST" class="support-form">
+                    <div class="form-group">
+                        <label for="support-name">Nome Completo</label>
+                        <input type="text" id="support-name" name="name" placeholder="Ex: Álvaro Zola" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="support-email">E-mail</label>
+                            <input type="email" id="support-email" name="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="support-phone">Telemóvel</label>
+                            <input type="tel" id="support-phone" name="phone" placeholder="9XXXXXXXX">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="support-subject">Assunto</label>
+                        <select id="support-subject" name="subject" required>
+                            <option value="" disabled selected>Selecione uma opção...</option>
+                            <option value="duvida">Dúvida sobre o Sistema</option>
+                            <option value="problema">Reportar um Bug/Problema</option>
+                            <option value="parceria">Parceria / Rede Cooperativa</option>
+                            <option value="outro">Outro Assunto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="support-message">Como podemos ajudar?</label>
+                        <textarea id="support-message" name="message" rows="4" placeholder="Escreva aqui detalhadamente a sua mensagem..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-support-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Enviar Pedido de Suporte
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
     <!-- RODAPÉ DA PÁGINA -->
     <footer class="main-footer">
         <div class="footer-container">
@@ -233,6 +325,6 @@
             <p style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Construído com foco em usabilidade e design humanista.</p>
         </div>
     </footer>
-
+    <script src="script/suporte.js"></script>
 </body>
 </html>

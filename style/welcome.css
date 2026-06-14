@@ -447,3 +447,173 @@ body {
         margin: 60px auto;
     }
 }
+
+/* ==========================================================================
+   SECÇÃO DE SUPORTE
+   ========================================================================== */
+.support-section {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.support-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.support-info, .support-form-box {
+    flex: 1;
+    min-width: 320px;
+}
+
+.support-info h3, .support-form-box h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.support-info > p {
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Canais de Atendimento */
+.support-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.channel-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.01);
+}
+
+.channel-icon {
+    font-size: 1.8rem;
+    color: #0f172a;
+    background: #f1f5f9;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.channel-icon.text-green { color: #22c55e; background: #f0fdf4; }
+.channel-icon.text-blue { color: #3b82f6; background: #eff6ff; }
+
+.channel-details h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.05rem;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.channel-details p {
+    margin: 0 0 2px 0;
+    font-size: 1rem;
+    color: #0f172a;
+    font-weight: 600;
+}
+
+.channel-details span {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Formulário de Suporte */
+.support-form-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.03);
+}
+
+.support-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 140px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background-color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.btn-support-submit {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-support-submit:hover {
+    background-color: #1d4ed8;
+}
+
+/* Responsividade do formulário */
+@media (max-width: 768px) {
+    .support-section { margin: 60px auto; }
+    .support-form-box { padding: 25px; }
+}
