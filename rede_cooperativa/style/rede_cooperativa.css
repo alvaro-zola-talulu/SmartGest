@@ -1,0 +1,175 @@
+:root {
+    --bg-rede: #f1f5f9;
+    --primary-rede: #059669; /* Verde Sucesso / Cooperativa */
+    --secondary-rede: #4f46e5; /* Índigo União */
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-rede);
+    color: var(--text-dark);
+}
+
+/* Header Estilizado */
+.rede-header {
+    background: linear-gradient(135deg, var(--primary-rede), var(--secondary-rede));
+    color: var(--white);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.btn-voltar {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.btn-voltar:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Perfil do Topo */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    background: var(--white);
+    color: var(--primary-rede);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Layout do Painel */
+.rede-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.rede-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rede-intro h2 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.rede-intro p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid de Cards */
+.rede-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Design dos Cartões de Links */
+.rede-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-dark);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.rede-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-rede);
+}
+
+/* Destaque para a Kixiquila */
+.rede-card.highlighted {
+    border: 2px solid var(--secondary-rede);
+    background: linear-gradient(to bottom right, #ffffff, #fafafa);
+}
+
+.card-icon {
+    font-size: 2rem;
+    color: var(--primary-rede);
+    margin-bottom: 20px;
+}
+
+.rede-card.highlighted .card-icon {
+    color: var(--secondary-rede);
+}
+
+.rede-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.rede-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+}
+
+.card-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-rede);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rede-card.highlighted .card-link {
+    color: var(--secondary-rede);
+}
+
+/* Animação Fade-In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animacao-entrada {
+    animation: fadeIn 0.4s ease-out forwards;
+}

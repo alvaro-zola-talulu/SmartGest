@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTGEST - Registar Venda</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-logo-box">
+                <img src="m.jpg" alt="Logo" class="sidebar-logo"
+                    onerror="this.style.display='none'; document.getElementById('fallback-side-title').style.display='block'">
+                <span id="fallback-side-title" class="sidebar-title-text">SISTEMA DE VENDAS</span>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item"><i class="fa-solid fa-house"></i> Início</a>
+                <a href="produtos.html" class="menu-item"><i class="fa-solid fa-box"></i> Produtos</a>
+                <a href="vendas.html" class="menu-item active"><i class="fa-solid fa-cart-shopping"></i> Vendas</a>
+                <a href="clientes.html" class="menu-item"><i class="fa-solid fa-users"></i> Clientes</a>
+                <a href="relatorios.html" class="menu-item"><i class="fa-solid fa-file-invoice-dollar"></i> Relatórios</a>
+                <a href="definicoes.html" class="menu-item"><i class="fa-solid fa-gear"></i> Definições</a>
+                <a href="rede_cooperativa/rede_cooperativa.html" class="menu-item"><i class="fa-solid fa-handshake"></i> Rede Cooperativa</a>
+                <a href="ajuda.html" class="menu-item"><i class="fa-solid fa-circle-question"></i> Ajuda</a>
+            </nav>
+            <button class="menu-item logout-btn" onclick="handleLogout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+        </aside>
+
+        <main class="main-content  animacao-entrada">
+
+            <header class="top-header">
+                <div class="user-profile-wrapper">
+                    <div class="user-profile" onclick="toggleProfileDropdown(event)">
+                        <div class="avatar" id="user-avatar">U</div>
+                        <span class="username">
+                            <span id="user-display-name">Utilizador</span> 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                        </span>
+                    </div>
+
+                    <div id="profile-dropdown-menu" class="profile-dropdown">
+                        <div class="dropdown-header">
+                            <p class="dropdown-user-title" id="dropdown-user-name">Nome do Usuário</p>
+                            <span class="dropdown-user-role">Administrador da Conta</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="iban-section">
+    <p class="iban-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span><i class="fa-solid fa-credit-card text-blue"></i> Os Meus IBANs</span>
+        <!-- Botão para abrir o gestor de IBANs -->
+        <button onclick="openIbanManager(event)" style="background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
+            <i class="fa-solid fa-pen-to-square"></i> Gerir
+        </button>
+    </p>
+    
+    <!-- O JavaScript vai injetar a lista de IBANs aqui dentro automaticamente -->
+    <div id="dropdown-iban-list"></div>
+</div>
+                    </div>
+                </div>
+            </header>
+
+            <section id="tab-vendas" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-cart-shopping text-blue"></i> Registar Venda</h2>
+                </div>
+
+                <div class="form-card" style="margin-bottom: 24px;">
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Detalhes da Nova Venda</h4>
+                    
+                    <div class="form-field">
+                        <label for="sale-client-select">Cliente</label>
+                        <select id="sale-client-select"></select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="sale-product-select">Produto</label>
+                        <select id="sale-product-select" onchange="updateSaleTotal()"></select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="sale-qty">Quantidade</label>
+                        <input type="number" id="sale-qty" value="1" min="1" oninput="updateSaleTotal()">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="sale-unit-price">Preço Unitário</label>
+                        <input type="text" id="sale-unit-price" value="0 Kz" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+                    </div>
+                    
+                    <div class="total-field">
+                        <p style="font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 4px;">TOTAL DA VENDA</p>
+                        <div id="sale-total" class="total-value">0 Kz</div>
+                    </div>
+                    
+                    <button class="btn-success btn-full" onclick="registerSale(event)" style="margin-top: 20px;">
+                        <i class="fa-solid fa-check"></i> FINALIZAR VENDA
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mobile-nav">
+            <a href="dashboard.html" class="mobile-nav-item"><i class="fa-solid fa-house"></i><span>Início</span></a>
+            <a href="produtos.html" class="mobile-nav-item"><i class="fa-solid fa-box"></i><span>Produtos</span></a>
+            <a href="vendas.html" class="mobile-nav-item central-btn active">
+                <div class="plus-circle"><i class="fa-solid fa-plus"></i></div><span>Vender</span>
+            </a>
+            <a href="clientes.html" class="mobile-nav-item"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+            <a href="relatorios.html" class="mobile-nav-item"><i class="fa-solid fa-file-invoice-dollar"></i><span>Painel</span></a>
+        </footer>
+    </div>
+
+    <script src="script/script.js"></script>
+    <!-- Modal de Gestão de IBANs -->
+<div id="iban-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="form-card" style="width: 90%; max-width: 450px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span>Gerir Meus IBANs</span>
+            <i class="fa-solid fa-xmark" onclick="closeIbanModal()" style="cursor: pointer; color: #64748b;"></i>
+        </h4>
+        
+        <!-- Formulário para Adicionar -->
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+            <div class="form-field">
+                <label>Nome do Banco</label>
+                <input type="text" id="iban-bank-input" placeholder="Ex: BAI, BFA, BIC...">
+            </div>
+            <div class="form-field">
+                <label>IBAN</label>
+                <input type="text" id="iban-value-input" placeholder="AO06 0000...">
+            </div>
+            <button class="btn-primary" onclick="addIban()" style="padding: 8px; font-size: 0.9rem; margin-top: 5px;">
+                <i class="fa-solid fa-plus"></i> Adicionar IBAN
+            </button>
+        </div>
+
+        <!-- Lista para Remover -->
+        <p style="font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 10px;">IBANs Registados:</p>
+        <div id="modal-iban-list" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+.proximidade-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.proximidade-intro {
+    margin-bottom: 30px;
+}
+
+/* Painel de Filtros */
+.filtros-localizacao {
+    display: flex;
+    gap: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 35px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+.filter-group select {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background-color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+/* Grelha Geográfica */
+.proximidade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Card Geográfico */
+.geo-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.geo-tag-tipo {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+/* Cores dinâmicas por tipo de oportunidade no card */
+.geo-tag-tipo.kixiquila { background: #fee2e2; color: #991b1b; }
+.geo-tag-tipo.custo { background: #e0f2fe; color: #075985; }
+.geo-tag-tipo.empresa { background: #d1fae5; color: #065f46; }
+
+.geo-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    color: #0f172a;
+}
+
+.geo-card p {
+    font-size: 0.88rem;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+}
+
+.geo-local-badge {
+    background: #f1f5f9;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: #334155;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-geo-acao {
+    background: #4f46e5;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-geo-acao:hover {
+    background: #3730a3;
+}

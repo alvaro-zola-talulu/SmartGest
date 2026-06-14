@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proximidade Local - Rede Cooperativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/rede_cooperativa.css">
+    <link rel="stylesheet" href="style/rede_proximidade.css">
+</head>
+<body>
+
+    <header class="rede-header">
+        <div class="header-left">
+            <a href="rede_cooperativa.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Painel Geral</a>
+            <h1><i class="fa-solid fa-location-dot"></i> Negócios por Proximidade Local</h1>
+        </div>
+        <div class="user-profile">
+            <div class="avatar" id="user-avatar">...</div>
+            <span id="user-display-name">Carregando...</span>
+        </div>
+    </header>
+
+    <main class="proximidade-container animacao-entrada">
+        <section class="proximidade-intro">
+            <h2>Fortaleça o Comércio do seu Bairro</h2>
+            <p>Filtre e encontre todas as conexões, partilhas de custos e oportunidades comerciais ativas na sua região geográfica exacta.</p>
+        </section>
+
+        <section class="filtros-localizacao">
+            <div class="filter-group">
+                <label for="select-provincia"><i class="fa-solid fa-map"></i> Província</label>
+                <select id="select-provincia">
+                    <option value="Luanda">Luanda</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="select-municipio"><i class="fa-solid fa-city"></i> Município</label>
+                <select id="select-municipio">
+                    <option value="todos">Todos os Municípios</option>
+                    <option value="Viana">Viana</option>
+                    <option value="Belas">Belas</option>
+                    <option value="Cazenga">Cazenga</option>
+                    <option value="Cacuaco">Cacuaco</option>
+                </select>
+            </div>
+        </section>
+
+        <h2 class="section-title">Oportunidades e Empresas na Zona Selecionada</h2>
+        <section class="proximidade-grid" id="proximidade-lista">
+            </section>
+    </main>
+
+    <script src="../script/script.js"></script>
+    <script src="script/rede_proximidade.js"></script>
+</body>
+</html>

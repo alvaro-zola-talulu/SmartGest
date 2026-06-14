@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado de Fornecedores - Rede Cooperativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/rede_cooperativa.css"> <!-- Reutiliza o estilo base -->
+    <link rel="stylesheet" href="style/rede_fornecedores.css"> <!-- Estilo específico deste ecrã -->
+</head>
+<body>
+
+    <!-- Header da Rede -->
+    <header class="rede-header">
+        <div class="header-left">
+            <a href="rede_cooperativa.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Painel Geral</a>
+            <h1><i class="fa-solid fa-shop"></i> Mercado de Fornecedores & Parceiros</h1>
+        </div>
+        <div class="user-profile">
+            <div class="avatar" id="user-avatar">...</div>
+            <span id="user-display-name">Carregando...</span>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="fornecedores-container animacao-entrada">
+        
+        <!-- Barra de Pesquisa e Filtros -->
+        <section class="procura-section">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Pesquisar por distribuidor, produto ou serviço...">
+            </div>
+            
+            <div class="filter-box">
+                <select id="filter-categoria">
+                    <option value="todos">Todas as Categorias</option>
+                    <option value="alimentar">Alimentação e Bebidas</option>
+                    <option value="eletronicos">Eletrónicos e Tecnologia</option>
+                    <option value="logistica">Transporte e Logística</option>
+                    <option value="embalagens">Embalagens e Descartáveis</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Lista/Grelha de Fornecedores -->
+        <section class="fornecedores-grid" id="fornecedores-lista">
+            <!-- Os cards dos fornecedores vão ser injetados aqui pelo JavaScript -->
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../script.js"></script> <!-- Script global do sistema -->
+    <script src="script/rede_fornecedores.js"></script> <!-- Lógica desta página -->
+</body>
+</html>

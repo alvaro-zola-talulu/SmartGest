@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custos Partilhados - Rede Cooperativa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Links corrigidos para a subpasta css/ -->
+    <link rel="stylesheet" href="style/rede_cooperativa.css">
+    <link rel="stylesheet" href="style/rede_custos.css">
+</head>
+<body>
+
+    <!-- Header da Rede -->
+    <header class="rede-header">
+        <div class="header-left">
+            <a href="rede_cooperativa.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Painel Geral</a>
+            <h1><i class="fa-solid fa-truck-ramp-box"></i> Divisão de Custos Operacionais</h1>
+        </div>
+        <div class="user-profile">
+            <div class="avatar" id="user-avatar">...</div>
+            <span id="user-display-name">Carregando...</span>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="custos-container animacao-entrada">
+        <section class="custos-intro">
+            <h2>Divida Despesas, Aumente a sua Margem de Lucro</h2>
+            <p>Precisa de trazer mercadoria ou investir em publicidade na sua zona? Partilhe os custos de logística, transporte e infraestrutura com outros negócios próximos.</p>
+        </section>
+
+        <!-- Listagem de Divisões Ativas -->
+        <h2 class="section-title">Anúncios de Partilha Disponíveis</h2>
+        <section class="custos-grid" id="custos-lista">
+            <!-- Injetado dinamicamente pelo JS -->
+        </section>
+    </main>
+
+    <!-- Scripts corrigidos para a subpasta js/ e raiz -->
+    <script src="../script/script.js"></script> <!-- Sair da cooperativa para ir à raiz -->
+    <script src="script/rede_custos.js"></script>
+</body>
+</html>

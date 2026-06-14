@@ -1,0 +1,151 @@
+.fornecedores-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Secção de Pesquisa */
+.procura-section {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.search-box {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 0 15px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.search-box i {
+    color: #94a3b8;
+    margin-right: 10px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 12px 0;
+    font-size: 1rem;
+    outline: none;
+}
+
+.filter-box select {
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background-color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Grid de Fornecedores */
+.fornecedores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* Card Individual */
+.fornecedor-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.badge-confianca {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #d1fae5;
+    color: #065f46;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.fornecedor-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    color: #0f172a;
+}
+
+.categoria-tag {
+    display: inline-block;
+    background: #e0e7ff;
+    color: #3730a3;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.fornecedor-detalhes {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 10px 0;
+}
+
+.fornecedor-detalhes p {
+    margin: 4px 0;
+}
+
+/* Avaliação por Estrelas */
+.fornecedor-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.estrelas {
+    color: #f59e0b; /* Cor douradora */
+}
+
+.qtd-avaliacoes {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* Rodapé do Card */
+.fornecedor-footer {
+    margin-top: 15px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-contacto {
+    background: #059669; /* Verde da Rede */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-contacto:hover {
+    background: #047857;
+}

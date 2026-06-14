@@ -1,0 +1,140 @@
+.vitrine-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.vitrine-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 35px;
+    border: 1px solid #e2e8f0;
+}
+
+.vitrine-top-bar h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+    color: #0f172a;
+}
+
+.vitrine-top-bar p {
+    margin: 0;
+    color: #64748b;
+}
+
+.btn-anunciar {
+    background: #4f46e5; /* Cor Índigo */
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-anunciar:hover {
+    background: #3730a3;
+}
+
+/* Grid de Produtos */
+.vitrine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Card do Produto */
+.produto-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    transition: transform 0.2s;
+}
+
+.produto-card:hover {
+    transform: translateY(-4px);
+    border-color: #4f46e5;
+}
+
+/* Espaço da Imagem Emulada (Usamos cores leves com icon para não quebrar links) */
+.produto-imagem-placeholder {
+    height: 160px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #94a3b8;
+}
+
+.produto-corpo {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.empresa-anunciante {
+    font-size: 0.75rem;
+    color: #4f46e5;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.produto-corpo h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #0f172a;
+}
+
+.produto-descricao {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+}
+
+.produto-preco {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #059669; /* Verde Sucesso */
+}
+
+/* Rodapé do Card */
+.produto-rodape {
+    padding: 0 20px 20px 20px;
+}
+
+.btn-negociar {
+    background: #f1f5f9;
+    color: #334155;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-negociar:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}

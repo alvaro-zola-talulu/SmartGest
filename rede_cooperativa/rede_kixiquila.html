@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kixiquila - Compra Conjunta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/rede_cooperativa.css"> <!-- Estilo base -->
+    <link rel="stylesheet" href="style/rede_kixiquila.css"> <!-- Estilo específico -->
+</head>
+<body>
+
+    <!-- Header da Rede -->
+    <header class="rede-header">
+        <div class="header-left">
+            <a href="rede_cooperativa.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Painel Geral</a>
+            <h1><i class="fa-solid fa-layer-group"></i> Kixiquila de Stock (Compra Conjunta)</h1>
+        </div>
+        <div class="user-profile">
+            <div class="avatar" id="user-avatar">...</div>
+            <span id="user-display-name">Carregando...</span>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="kixiquila-container animacao-entrada">
+        
+        <section class="kixiquila-intro">
+            <h2>O Poder do Grupo: Compre no Grosso, Pague Menos</h2>
+            <p>Entre num grupo ativo ou envie a sua intenção de compra. Quando o grupo atingir a meta de quantidade, o pedido é fechado e o desconto do grande importador é aplicado a todos!</p>
+        </section>
+
+        <!-- Painel de Estatísticas Simples -->
+        <section class="kixiquila-stats">
+            <div class="stat-card">
+                <h3>Poupança Média</h3>
+                <p class="stat-value">28%</p>
+            </div>
+            <div class="stat-card">
+                <h3>Grupos Ativos</h3>
+                <p class="stat-value" id="total-grupos">0</p>
+            </div>
+        </section>
+
+        <!-- Lista de Grupos de Compra -->
+        <h2 class="section-title">Grupos de Compra em Aberto</h2>
+        <section class="grupos-grid" id="grupos-lista">
+            <!-- Injetado pelo JS -->
+        </section>
+    </main>
+
+    <!-- Modais/Popups (Opcional para ações futuras) -->
+    <script src="../script/script.js"></script>
+    <script src="script/rede_kixiquila.js"></script>
+</body>
+</html>

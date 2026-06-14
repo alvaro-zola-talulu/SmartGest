@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMARTGEST - Dashboard</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Ajustes finos de CSS incorporados para garantir a identidade visual idêntica à imagem */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        .metric-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .metric-info p {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .metric-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+        }
+        .metric-info span {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: block;
+            margin-top: 4px;
+        }
+        .metric-icon {
+            font-size: 2.2rem;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Cores e Fundos dos Ícones baseados na Imagem */
+        .bg-light-green { background-color: #e8f5e9; color: #2e7d32; }
+        .bg-light-blue { background-color: #e3f2fd; color: #1565c0; }
+        .bg-light-purple { background-color: #f3e5f5; color: #6a1b9a; }
+        .bg-light-orange { background-color: #fff3e0; color: #e65100; }
+
+        /* Layout em duas colunas (Gráfico / Avisos e Dicas) */
+        .dashboard-layout-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+        @media (max-width: 1024px) {
+            .dashboard-layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilização Manual da Dica do Dia */
+        .dica-card {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #c8e6c9;
+            margin-bottom: 20px;
+        }
+        .dica-conteudo {
+            flex: 1;
+            padding-right: 15px;
+        }
+        .dica-conteudo h4 {
+            color: #1b5e20;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+        .dica-conteudo p {
+            color: #2e7d32;
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+        .dica-avatar-box {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .dica-avatar-box img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Melhorias visuais na lista de pouco stock */
+        .stock-list-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .stock-list-card li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .stock-list-card li:last-child {
+            border-bottom: none;
+        }
+        .stock-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stock-icon-wrapper {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .bg-danger-icon { background-color: #ef4444; }
+        .bg-warning-icon { background-color: #f97316; }
+        .bg-info-icon { background-color: #3b82f6; }
+        
+        /* Links e Botões de Ação estilo Imagem */
+        .btn-view-more {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn-view-more:hover { background: #1d4ed8; }
+        .link-ver-todos {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .link-ver-todos:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-logo-box">
+                <img src="#" alt="Logo" class="sidebar-logo"
+                    onerror="this.style.display='none'; document.getElementById('fallback-side-title').style.display='block'">
+                <span id="fallback-side-title" class="sidebar-title-text">SISTEMA DE VENDAS</span>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item active"><i class="fa-solid fa-house"></i> Início</a>
+                <a href="produtos.html" class="menu-item"><i class="fa-solid fa-box"></i> Produtos</a>
+                <a href="vendas.html" class="menu-item"><i class="fa-solid fa-cart-shopping"></i> Vendas</a>
+                <a href="clientes.html" class="menu-item"><i class="fa-solid fa-users"></i> Clientes</a>
+                <a href="relatorios.html" class="menu-item"><i class="fa-solid fa-file-invoice-dollar"></i> Relatórios</a>
+                <a href="definicoes.html" class="menu-item"><i class="fa-solid fa-gear"></i> Definições</a>
+                <a href="rede_cooperativa/rede_cooperativa.html" class="menu-item"><i class="fa-solid fa-handshake"></i> Rede Cooperativa</a>
+                <a href="ajuda.html" class="menu-item"><i class="fa-solid fa-circle-question"></i> Ajuda</a>
+            </nav>
+            <button class="menu-item logout-btn" onclick="handleLogout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+        </aside>
+
+        <main class="main-content animacao-entrada">
+
+            <header class="top-header">
+                <div class="user-profile-wrapper">
+                    <div class="user-profile" onclick="toggleProfileDropdown(event)">
+                        <div class="avatar" id="user-avatar">U</div>
+                        <span class="username">
+                            <span id="user-display-name">Utilizador</span> 
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                        </span>
+                    </div>
+                    <div id="profile-dropdown-menu" class="profile-dropdown">
+                        <div class="dropdown-header">
+                            <p class="dropdown-user-title" id="dropdown-user-name">Nome do Usuário</p>
+                            <span class="dropdown-user-role">Administrador da Conta</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="iban-section">
+    <p class="iban-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span><i class="fa-solid fa-credit-card text-blue"></i> Os Meus IBANs</span>
+        <!-- Botão para abrir o gestor de IBANs -->
+        <button onclick="openIbanManager(event)" style="background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
+            <i class="fa-solid fa-pen-to-square"></i> Gerir
+        </button>
+    </p>
+    
+    <!-- O JavaScript vai injetar a lista de IBANs aqui dentro automaticamente -->
+    <div id="dropdown-iban-list"></div>
+</div>
+                    </div>
+                </div>
+            </header>
+
+            <section id="tab-inicio" class="tab-content">
+                <div class="welcome-section" style="margin-bottom: 24px;">
+                    <h2 style="font-size: 1.6rem; font-weight: 700;">Olá, <span id="welcome-name">Usuário</span>!</h2>
+                    <p style="color: #64748b; margin-top: 4px;">Aqui está o resumo do seu negócio hoje.</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <p>Vendas Hoje</p>
+                            <h3 id="dash-vendas-qtd">0</h3>
+                            <span>Total de vendas</span>
+                        </div>
+                        <div class="metric-icon bg-light-green"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <p>Receita Hoje</p>
+                            <h3 id="dash-receita-total">0 Kz</h3>
+                            <span>Total ganho</span>
+                        </div>
+                        <div class="metric-icon bg-light-blue"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <p>Produtos</p>
+                            <h3 id="dash-produtos-qtd">0</h3>
+                            <span>Produtos registados</span>
+                        </div>
+                        <div class="metric-icon bg-light-purple"><i class="fa-solid fa-box"></i></div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <p>Clientes</p>
+                            <h3 id="dash-clientes-qtd">0</h3>
+                            <span>Total de clientes</span>
+                        </div>
+                        <div class="metric-icon bg-light-orange"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-layout-grid">
+                    
+                    <div class="form-card" style="display: flex; flex-direction: column; justify-content: space-between; background:#fff; padding:20px; border-radius:12px; border:1px solid #f1f5f9;">
+                        <div>
+                            <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 2px;">Vendas dos últimos 7 dias</h4>
+                            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:15px;" id="chart-max-value">Escala máxima: Dinâmica</p>
+                        </div>
+                        <div class="fake-chart" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+                            <div class="chart-line-container">
+                                <svg viewBox="0 0 500 180" class="svg-chart" style="width: 100%; height: auto;" id="dinamic-svg-chart">
+                                    <line x1="20" y1="30" x2="480" y2="30" stroke="#f1f5f9" stroke-width="1" />
+                                    <line x1="20" y1="70" x2="480" y2="70" stroke="#f1f5f9" stroke-width="1" />
+                                    <line x1="20" y1="110" x2="480" y2="110" stroke="#f1f5f9" stroke-width="1" />
+                                    <line x1="20" y1="150" x2="480" y2="150" stroke="#f1f5f9" stroke-width="1" />
+                                    
+                                    <polyline id="chart-polyline" fill="none" stroke="#2563eb" stroke-width="3" points="20,150 96,150 172,150 248,150 324,150 400,150 476,150" />
+                                    <g id="chart-dots-group"></g>
+                                </svg>
+                            </div>
+                            <div class="chart-labels" style="display: flex; justify-content: space-between; margin-top: 12px; color: #64748b; font-size: 0.85rem; padding: 0 10px; font-weight:600;">
+                                <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="alert-card" style="margin-bottom:15px;">
+                            <h4 style="font-size: 1rem; font-weight: 700; color:#b45309;"><i class="fa-solid fa-triangle-exclamation"></i> Atenção!</h4>
+                            <p style="font-size: 0.9rem; margin-top: 4px; color:#d97706;">Existem produtos com pouco stock no inventário.</p>
+                            <a href="produtos.html" class="btn-view-more" style="background:#2563eb;">Ver produtos</a>
+                        </div>
+
+                        <div class="dica-card">
+                            <div class="dica-conteudo">
+                                <h4>Dica do dia</h4>
+                                <p>Registe sempre as suas vendas para saber exatamente quanto está a ganhar e controlar melhor o fluxo.</p>
+                            </div>
+                            <div class="dica-avatar-box">
+                                <i class="fa-solid fa-user-tie" style="font-size: 4rem; color: #2e7d32; opacity: 0.85;"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="stock-list-card" style="background:#fff; padding:20px; border-radius:12px; border:1px solid #f1f5f9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                                <h4 style="font-size: 1rem; font-weight: 700; margin:0;">Produtos com pouco stock</h4>
+                                <a href="produtos.html" class="link-ver-todos">Ver todos</a>
+                            </div>
+                            <ul id="dash-low-stock-list">
+                                </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer class="mobile-nav">
+            <a href="dashboard.html" class="mobile-nav-item active"><i class="fa-solid fa-house"></i><span>Início</span></a>
+            <a href="produtos.html" class="mobile-nav-item"><i class="fa-solid fa-box"></i><span>Produtos</span></a>
+            <a href="vendas.html" class="mobile-nav-item central-btn">
+                <div class="plus-circle"><i class="fa-solid fa-plus"></i></div><span>Vender</span>
+            </a>
+            <a href="clientes.html" class="mobile-nav-item"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
+            <a href="relatorios.html" class="mobile-nav-item"><i class="fa-solid fa-file-invoice-dollar"></i><span>Painel</span></a>
+        </footer>
+    </div>
+
+    
+    <script src="script/script.js"></script>
+    <!-- Modal de Gestão de IBANs -->
+<div id="iban-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="form-card" style="width: 90%; max-width: 450px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span>Gerir Meus IBANs</span>
+            <i class="fa-solid fa-xmark" onclick="closeIbanModal()" style="cursor: pointer; color: #64748b;"></i>
+        </h4>
+        
+        <!-- Formulário para Adicionar -->
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+            <div class="form-field">
+                <label>Nome do Banco</label>
+                <input type="text" id="iban-bank-input" placeholder="Ex: BAI, BFA, BIC...">
+            </div>
+            <div class="form-field">
+                <label>IBAN</label>
+                <input type="text" id="iban-value-input" placeholder="AO06 0000...">
+            </div>
+            <button class="btn-primary" onclick="addIban()" style="padding: 8px; font-size: 0.9rem; margin-top: 5px;">
+                <i class="fa-solid fa-plus"></i> Adicionar IBAN
+            </button>
+        </div>
+
+        <!-- Lista para Remover -->
+        <p style="font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 10px;">IBANs Registados:</p>
+        <div id="modal-iban-list" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
+    </div>
+</div>
+</body>
+
+</html>
