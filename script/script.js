@@ -16,6 +16,9 @@ let produtos = [];
 let clientes = [];
 let vendas = [];
 
+// VARIÁVEL AUXILIAR PARA GUARDAR O ÍNDICE DO PRODUTO A SER ELIMINADO
+let produtoIndexParaEliminar = null;
+
 // Carrega os dados isolados do utilizador ativo
 function carregarDadosDoUsuario() {
     const usuario = getUsuarioAtivo();
@@ -142,7 +145,9 @@ function handleLogout() {
     window.location.href = 'index.html';
 }
 
-// GESTÃO DE PRODUTOS
+// ==========================================
+// GESTÃO DE PRODUTOS (CORRIGIDO)
+// ==========================================
 function renderProdutos() {
     const tbody = document.getElementById('products-table-body');
     if (!tbody) return;
@@ -170,7 +175,7 @@ function renderProdutos() {
                 <td>${prod.stock}</td>
                 <td>
                     <button class="btn-edit" onclick="editProduct(${index})"><i class="fa-solid fa-pencil"></i></button>
-                    <button class="btn-delete" onclick="deleteProduct(${index})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-delete" onclick="openDeleteProductModal(${index})"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -210,15 +215,17 @@ function saveProduct() {
     const index = document.getElementById('product-edit-index').value;
 
     if(!nome || isNaN(preco) || isNaN(custo) || isNaN(stock)) {
-        alert("Preencha todos os campos do produto corretamente!");
+        showProductAlert("Campos Incompletos", "Por favor, preencha todos os campos do produto corretamente!", "error");
         return;
     }
 
     const item = { nome, preco, custo, stock };
     if(index === "") { 
         produtos.push(item); 
+        showProductAlert("Produto Adicionado", `"${nome}" foi registado no sistema com sucesso.`, "success");
     } else { 
         produtos[index] = item; 
+        showProductAlert("Produto Atualizado", `As alterações em "${nome}" foram guardadas.`, "success");
     }
     
     persistData();
@@ -237,13 +244,66 @@ function editProduct(index) {
     document.getElementById('product-form-container').classList.remove('hidden-element');
 }
 
-// ADICIONADO: Função que estava em falta para evitar erro ao clicar no botão de apagar produto
-function deleteProduct(index) {
-    if(confirm(`Tem a certeza que deseja eliminar o produto "${produtos[index].nome}"?`)) {
-        produtos.splice(index, 1);
+// MUDANÇA DE NOME PARA EVITAR CONFLITOS E REGRAS DO MODAL
+function openDeleteProductModal(index) {
+    produtoIndexParaEliminar = index;
+    const prod = produtos[index];
+    
+    // Insere o nome do produto no modal HTML
+    const labelNome = document.getElementById('delete-product-name');
+    if(labelNome) labelNome.innerText = prod.nome;
+    
+    // Vincula a execução ao botão do modal
+    const btnConfirm = document.getElementById('confirm-delete-product-btn');
+    if(btnConfirm) btnConfirm.onclick = executeProductDeletion;
+    
+    // Mostra o modal na tela
+    const modal = document.getElementById('delete-product-modal');
+    if(modal) modal.style.display = 'flex';
+}
+
+function executeProductDeletion() {
+    if (produtoIndexParaEliminar !== null) {
+        produtos.splice(produtoIndexParaEliminar, 1);
         persistData();
         renderProdutos();
+        closeDeleteProductModal();
+        showProductAlert("Sucesso", "O produto foi eliminado do inventário com sucesso!", "success");
     }
+}
+
+function closeDeleteProductModal() {
+    const modal = document.getElementById('delete-product-modal');
+    if(modal) modal.style.display = 'none';
+    produtoIndexParaEliminar = null;
+}
+
+function showProductAlert(title, message, type) {
+    const iconDiv = document.getElementById('product-alert-icon');
+    const btn = document.getElementById('product-alert-btn');
+    const modal = document.getElementById('product-alert-modal');
+    
+    if(!modal || !iconDiv || !btn) return;
+
+    document.getElementById('product-alert-title').innerText = title;
+    document.getElementById('product-alert-message').innerText = message;
+    
+    if (type === "success") {
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        iconDiv.style.color = "#10b981"; 
+        btn.style.background = "#2563eb"; 
+    } else {
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        iconDiv.style.color = "#ef4444"; 
+        btn.style.background = "#ef4444";
+    }
+    
+    modal.style.display = 'flex';
+}
+
+function closeProductAlertModal() {
+    const modal = document.getElementById('product-alert-modal');
+    if(modal) modal.style.display = 'none';
 }
 
 // GESTÃO DE CLIENTES
@@ -281,7 +341,6 @@ function closeClientModal() {
     document.getElementById('client-form-container').classList.add('hidden-element');
 }
 
-// Validação melhorada de campos vazios
 function saveClient() {
     const nome = document.getElementById('cli-nome').value.trim();
     const telefone = document.getElementById('cli-telefone').value.trim();
@@ -341,7 +400,6 @@ function renderVendasFormOptions() {
     produtos.forEach((p, idx) => { prodSelect.innerHTML += `<option value="${idx}">${p.nome} (Dispo: ${p.stock})</option>`; });
 }
 
-// Atualiza totais na tela de venda
 function updateSaleTotal() {
     const selectElem = document.getElementById('sale-product-select');
     if (!selectElem) return;
@@ -464,7 +522,6 @@ function renderDashboardEInsights() {
         lowStockList.innerHTML = "<li><span class='text-green' style='font-size:0.9rem;'><i class='fa-solid fa-circle-check'></i> Todo o inventário está seguro!</span></li>";
     }
 
-    // Geração do gráfico semanal baseado nas datas reais
     const dataAtual = new Date();
     const diaSemanaAtual = dataAtual.getDay(); 
     
@@ -554,12 +611,10 @@ function renderRelatorios() {
             incluirVenda = true;
         } else {
             let mesVenda = -1;
-            // OTIMIZAÇÃO: Prioriza sempre usar o timestamp guardado para o cálculo do mês de forma segura
             if (v.timestamp) {
                 mesVenda = new Date(v.timestamp).getMonth();
             } else if (v.data) {
                 try {
-                    // Fallback estruturado para datas antigas ou sem timestamp
                     const partesData = v.data.split(' ')[0];
                     const caractereDivisao = partesData.includes('/') ? '/' : '-';
                     mesVenda = parseInt(partesData.split(caractereDivisao)[1]) - 1;
