@@ -735,3 +735,72 @@ button:active {
 .animacao-entrada {
     animation: fadeIn 0.6s ease-out forwards;
 }
+
+/* ==========================================================================
+   CORREÇÃO DE RESPONSIVIDADE PARA A TABELA DE PRODUTOS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* 1. Torna o contentor da tabela rolável apenas para dentro dele mesmo */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
+        padding: 12px; /* Ajusta o espaçamento interno no mobile */
+    }
+
+    /* 2. Garante que a tabela mantém uma largura mínima legível para não esmagar o texto */
+    table {
+        min-width: 600px;
+    }
+
+    /* 3. Ajusta os cabeçalhos e seções de topo para mobile */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .section-header .btn-primary {
+        width: 100%; /* Botão "Novo Produto" ocupa a largura total no mobile */
+        text-align: center;
+    }
+    
+    /* 4. Corrige os botões de ação para não quebrarem linha de forma feia */
+    .btn-edit, .btn-delete {
+        margin-bottom: 0px; 
+        display: inline-flex;
+    }
+}
+
+/* ==========================================================================
+   AJUSTE DE ESPAÇAMENTO DAS COLUNAS (PRODUTOS E CLIENTES)
+   ========================================================================== */
+
+/* Força a tabela a ocupar apenas o espaço necessário se for maior que o ecrã, 
+   em vez de esticar as colunas vazias */
+table {
+    table-layout: auto; 
+}
+
+/* Alinha e encolhe a coluna de ações (botões editar/eliminar) ao mínimo possível */
+th style*="width: 100px;", 
+td:last-child {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Se quiseres ajustar especificamente a tabela da página de Clientes:
+   Podes adicionar uma classe na tag <table> de clientes, ex: <table class="tabela-clientes">
+   E usar as regras abaixo para controlar o comportamento das colunas: */
+
+.tabela-clientes th:nth-child(1), /* Coluna Nome */
+.tabela-clientes td:nth-child(1) {
+    width: 50%; /* Dá mais espaço para nomes longos */
+}
+
+.tabela-clientes th:nth-child(2), /* Coluna Telefone/Contacto */
+.tabela-clientes td:nth-child(2) {
+    width: 30%; /* Espaço controlado para o contacto */
+}
