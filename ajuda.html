@@ -27,11 +27,9 @@
                 <a href="produtos.html" class="menu-item"><i class="fa-solid fa-box"></i> Produtos</a>
                 <a href="vendas.html" class="menu-item"><i class="fa-solid fa-cart-shopping"></i> Vendas</a>
                 <a href="clientes.html" class="menu-item"><i class="fa-solid fa-users"></i> Clientes</a>
-                <a href="relatorios.html" class="menu-item"><i class="fa-solid fa-file-invoice-dollar"></i>
-                    Relatórios</a>
+                <a href="relatorios.html" class="menu-item"><i class="fa-solid fa-file-invoice-dollar"></i> Relatórios</a>
                 <a href="definicoes.html" class="menu-item"><i class="fa-solid fa-gear"></i> Definições</a>
-                <a href="rede_cooperativa/rede_cooperativa.html" class="menu-item"><i class="fa-solid fa-handshake"></i>
-                    Rede Cooperativa</a>
+                <a href="rede_cooperativa/rede_cooperativa.html" class="menu-item"><i class="fa-solid fa-handshake"></i> Rede Cooperativa</a>
                 <a href="ajuda.html" class="menu-item active"><i class="fa-solid fa-circle-question"></i> Ajuda</a>
             </nav>
             <button class="menu-item logout-btn" onclick="handleLogout()">
@@ -54,17 +52,12 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="iban-section">
-                            <p class="iban-title"
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <p class="iban-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                                 <span><i class="fa-solid fa-credit-card text-blue"></i> Os Meus IBANs</span>
-                                <!-- Botão para abrir o gestor de IBANs -->
-                                <button onclick="openIbanManager(event)"
-                                    style="background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
+                                <button onclick="openIbanManager(event)" style="background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
                                     <i class="fa-solid fa-pen-to-square"></i> Gerir
                                 </button>
                             </p>
-
-                            <!-- O JavaScript vai injetar a lista de IBANs aqui dentro automaticamente -->
                             <div id="dropdown-iban-list"></div>
                         </div>
                     </div>
@@ -76,43 +69,32 @@
                     <h2><i class="fa-solid fa-circle-question text-blue"></i> Ajuda & Suporte Técnico</h2>
                 </div>
 
-                <div class="form-card" style=margin:0 auto; border-left: 4px solid #3b82f6;">
+                <div class="form-card" style="margin: 0 auto; border-left: 4px solid #3b82f6;">
                     <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 12px;">
                         Precisas de assistência ou encontraste algum problema?
                     </h4>
                     <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
-                        O nosso suporte técnico está pronto para te ajudar a configurar a plataforma, tirar dúvidas ou
-                        resolver anomalias operacionais no sistema.
+                        O nosso suporte técnico está pronto para te ajudar a configurar a plataforma, tirar dúvidas ou resolver anomalias operacionais no sistema.
                     </p>
 
-                    <div
-                        style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 16px;">
-                        <div
-                            style="background-color: #dcfce7; color: #15803d; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+                    <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 16px;">
+                        <div style="background-color: #dcfce7; color: #15803d; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
                             <i class="fa-solid fa-phone"></i>
                         </div>
                         <div>
-                            <span
-                                style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Terminal
-                                Telefónico</span>
-                            <p style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-top: 2px;">+244 976
-                                339 719</p>
+                            <span style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Terminal Telefónico</span>
+                            <p style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-top: 2px;">+244 976 339 719</p>
                         </div>
                     </div>
 
-                    <div
-                        style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 8px; display: flex; align-items: center; gap: 16px;">
-                        <div
-                            style="background-color: #fee2e2; color: #b91c1c; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+                    <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 8px; display: flex; align-items: center; gap: 16px;">
+                        <div style="background-color: #fee2e2; color: #b91c1c; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
                             <i class="fa-solid fa-envelope"></i>
                         </div>
                         <div>
-                            <span
-                                style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Correio
-                                Eletrónico</span>
+                            <span style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Correio Eletrónico</span>
                             <p style="margin-top: 2px;">
-                                <a href="mailto:Smartvenda@gmail.com"
-                                    style="font-size: 1.1rem; font-weight: 800; color: #2563eb; text-decoration: none;">SmartGest@gmail.com</a>
+                                <a href="mailto:SmartGest@gmail.com" style="font-size: 1.1rem; font-weight: 800; color: #2563eb; text-decoration: none;">SmartGest@gmail.com</a>
                             </p>
                         </div>
                     </div>
@@ -127,9 +109,7 @@
                 <div class="plus-circle"><i class="fa-solid fa-plus"></i></div><span>Vender</span>
             </a>
             <a href="clientes.html" class="mobile-nav-item"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
-
-            <button class="mobile-nav-item" style="background:none; border:none; cursor:pointer;"
-                onclick="toggleMobileDrawer()">
+            <button class="mobile-nav-item" style="background:none; border:none; cursor:pointer;" onclick="toggleMobileDrawer()">
                 <i class="fa-solid fa-ellipsis-vertical"></i><span>Mais</span>
             </button>
         </footer>
@@ -138,39 +118,31 @@
         <aside id="mobile-drawer" class="mobile-drawer">
             <div class="drawer-header">
                 <h3>Opções SmartGest</h3>
-                <button class="btn-close-drawer" onclick="toggleMobileDrawer()"><i
-                        class="fa-solid fa-xmark"></i></button>
+                <button class="btn-close-drawer" onclick="toggleMobileDrawer()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <nav class="drawer-menu">
-                <a href="relatorios.html" class="drawer-item"><i class="fa-solid fa-file-invoice-dollar"></i> Painel de
-                    Relatórios</a>
-                <a href="rede_cooperativa/rede_cooperativa.html" class="drawer-item"><i
-                        class="fa-solid fa-handshake"></i> Rede Cooperativa</a>
+                <a href="relatorios.html" class="drawer-item"><i class="fa-solid fa-file-invoice-dollar"></i> Painel de Relatórios</a>
+                <a href="rede_cooperativa/rede_cooperativa.html" class="drawer-item"><i class="fa-solid fa-handshake"></i> Rede Cooperativa</a>
                 <a href="definicoes.html" class="drawer-item"><i class="fa-solid fa-gear"></i> Definições Gerais</a>
                 <a href="ajuda.html" class="drawer-item"><i class="fa-solid fa-circle-question"></i> Centro de Ajuda</a>
                 <div style="border-top: 1px solid #1e293b; margin: 15px 0;"></div>
-                <button class="drawer-item logout-btn" onclick="handleLogout()"
-                    style="background:none; border:none; width:100%; text-align:left; cursor:pointer; color: #f87171;">
+                <button class="drawer-item logout-btn" onclick="handleLogout()" style="background:none; border:none; width:100%; text-align:left; cursor:pointer; color: #f87171;">
                     <i class="fa-solid fa-right-from-bracket"></i> Sair do Sistema
                 </button>
             </nav>
         </aside>
     </div>
+
     <script src="script/script.js"></script>
-    <!-- Modal de Gestão de IBANs -->
-    <div id="iban-modal"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
-        <div class="form-card"
-            style="width: 90%; max-width: 450px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-            <h4
-                style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+
+    <div id="iban-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+        <div class="form-card" style="width: 90%; max-width: 450px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                 <span>Gerir Meus IBANs</span>
                 <i class="fa-solid fa-xmark" onclick="closeIbanModal()" style="cursor: pointer; color: #64748b;"></i>
             </h4>
 
-            <!-- Formulário para Adicionar -->
-            <div
-                style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
                 <div class="form-field">
                     <label>Nome do Banco</label>
                     <input type="text" id="iban-bank-input" placeholder="Ex: BAI, BFA, BIC...">
@@ -179,17 +151,15 @@
                     <label>IBAN</label>
                     <input type="text" id="iban-value-input" placeholder="AO06 0000...">
                 </div>
-                <button class="btn-primary" onclick="addIban()"
-                    style="padding: 8px; font-size: 0.9rem; margin-top: 5px;">
+                <button class="btn-primary" onclick="addIban()" style="padding: 8px; font-size: 0.9rem; margin-top: 5px;">
                     <i class="fa-solid fa-plus"></i> Adicionar IBAN
                 </button>
             </div>
 
-            <!-- Lista para Remover -->
             <p style="font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 10px;">IBANs Registados:</p>
-            <div id="modal-iban-list"
-                style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
+            <div id="modal-iban-list" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
-</body>
+    </div>
 
+</body>
 </html>
