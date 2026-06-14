@@ -630,3 +630,17 @@ body {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Configuração base para todas as secções que vão animar no scroll */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(30px); /* Começa um pouco mais abaixo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform; /* Otimiza a performance do navegador */
+}
+
+/* Classe que o JavaScript vai injetar quando a secção aparecer no ecrã */
+.scroll-fade.visivel {
+    opacity: 1;
+    transform: translateY(0); /* Volta à posição original */
+}

@@ -1,30 +1,53 @@
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', function(event) {
-        event.preventDefault(); // Impede o salto seco/brusco padrão do HTML
-        
-        // Obtém o ID da secção alvo (ex: #recursos, #sobre, #desenvolvedores, #suporte)
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // ==========================================
+    // 1. ANIMAÇÃO AO FAZER SCROLL (ROLAGEM)
+    // ==========================================
+    const seccoes = document.querySelectorAll('.scroll-fade');
 
-        if (targetSection) {
-            // 1. Remove o efeito visual de qualquer outra secção ativa antes
-            document.querySelectorAll('section').forEach(sec => {
-                sec.classList.remove('seccao-fade', 'visivel');
-            });
+    const opcoesObserver = {
+        root: null,         // Usa o ecrã do navegador como referência
+        rootMargin: "0px",  // Sem margens extra
+        threshold: 0.15     // Ativa a animação quando 15% da secção estiver visível
+    };
 
-            // 2. Aplica a preparação do fade na secção escolhida
-            targetSection.classList.add('seccao-fade');
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            // Se a secção entrou na área visível do ecrã
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visivel');
+                // Opcional: desativa o observador para a secção não sumir se subir de novo
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, opcoesObserver);
 
-            // 3. Faz o scroll suave até à secção
-            targetSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+    // Ativar o observador em cada uma das secções
+    seccoes.forEach(seccao => {
+        scrollObserver.observe(seccao);
+    });
 
-            // 4. Ativa o Fade-In (com um mini atraso para dar tempo ao scroll iniciar)
-            setTimeout(() => {
+
+    // ==========================================
+    // 2. CORREÇÃO DO CLIQUE SUAVE NO MENU
+    // ==========================================
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                // Força a aparição imediata se o utilizador clicou diretamente no menu
                 targetSection.classList.add('visivel');
-            }, 100);
-        }
+                
+                // Faz o deslize suave
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
 });
