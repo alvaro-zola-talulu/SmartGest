@@ -173,3 +173,135 @@ body {
 .animacao-entrada {
     animation: fadeIn 0.4s ease-out forwards;
 }
+
+/* ==========================================================================
+   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* 1. Correção do Cabeçalho */
+    .rede-header {
+        padding: 12px 16px;
+        flex-direction: column; /* Transforma o topo em blocos empilhados */
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .header-left {
+        flex-direction: row;
+        justify-content: space-between; /* Mantém o botão e o Título alinhados */
+        width: 100%;
+        gap: 10px;
+    }
+
+    .header-left h1 {
+        font-size: 1.2rem; /* Texto ligeiramente menor para não quebrar */
+        order: 1;
+    }
+
+    .btn-voltar {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        order: 2; /* Joga o botão para a direita no mobile, facilitando o clique */
+    }
+
+    /* Move o perfil para baixo do título de forma discreta e alinhada à direita */
+    .rede-header .user-profile {
+        align-self: flex-end;
+        font-size: 0.85rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 8px;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    /* Ajustes do Contentor Geral */
+    .rede-container {
+        margin: 20px auto;
+    }
+
+    .rede-intro h2 {
+        font-size: 1.6rem;
+    }
+
+    /* ==========================================================================
+   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES) - VITRINE COMUNITÁRIA
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* 1. Correção do Cabeçalho da Rede (Mantido do passo anterior) */
+    .rede-header {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .header-left {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+    }
+    .header-left h1 {
+        font-size: 1.2rem;
+    }
+    .btn-voltar {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+    .rede-header .user-profile {
+        align-self: flex-end;
+        font-size: 0.85rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 8px;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    /* 2. Correção Crítica da Vitrine (Barra de Topo) */
+    .vitrine-top-bar {
+        flex-direction: column; /* Empilha o texto e o botão verticalmente */
+        align-items: stretch !important; /* Força ambos a ocupar a largura total */
+        gap: 16px;
+        padding: 15px;
+        text-align: left;
+    }
+
+    .vitrine-top-bar h2 {
+        font-size: 1.4rem; /* Diminui o título para não quebrar feio */
+        margin-bottom: 6px;
+    }
+
+    .vitrine-top-bar p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    /* Força o botão "Publicar Produto/Serviço" a ficar centralizado e largo no mobile */
+    .btn-anunciar {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* 3. Ajuste da Grelha de Exibição dos Produtos */
+    .vitrine-grid {
+        grid-template-columns: 1fr !important; /* Força os produtos a ficarem um debaixo do outro */
+        gap: 16px;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-left h1 {
+        font-size: 1.1rem;
+    }
+    .rede-container {
+        padding: 0 12px;
+    }
+}
