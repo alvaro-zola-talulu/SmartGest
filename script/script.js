@@ -691,3 +691,12 @@ function removeIban(index) {
         updateIbanDisplays();
     }
 }
+
+// Função para abrir e fechar a gaveta de links (3 pontos) no Mobile
+    function toggleMobileDrawer() {
+        const drawer = document.getElementById('mobile-drawer');
+        const overlay = document.getElementById('drawer-overlay');
+        
+        drawer.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
