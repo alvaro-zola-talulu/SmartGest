@@ -57,14 +57,11 @@
                             <p class="iban-title"
                                 style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                                 <span><i class="fa-solid fa-credit-card text-blue"></i> Os Meus IBANs</span>
-                                <!-- Botão para abrir o gestor de IBANs -->
                                 <button onclick="openIbanManager(event)"
                                     style="background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
                                     <i class="fa-solid fa-pen-to-square"></i> Gerir
                                 </button>
                             </p>
-
-                            <!-- O JavaScript vai injetar a lista de IBANs aqui dentro automaticamente -->
                             <div id="dropdown-iban-list"></div>
                         </div>
                     </div>
@@ -97,8 +94,7 @@
                             style="background-color: #f1f5f9; cursor: not-allowed; color: #64748b;">
                     </div>
 
-                    <button class="btn-primary btn-full" onclick="alert('Definições salvas com sucesso!')"
-                        style="margin-top: 10px;">
+                    <button class="btn-primary btn-full" onclick="salvarConfiguracoes()" style="margin-top: 10px;">
                         <i class="fa-solid fa-floppy-disk"></i> Guardar Configurações
                     </button>
                 </div>
@@ -112,7 +108,6 @@
                 <div class="plus-circle"><i class="fa-solid fa-plus"></i></div><span>Vender</span>
             </a>
             <a href="clientes.html" class="mobile-nav-item"><i class="fa-solid fa-users"></i><span>Clientes</span></a>
-
             <button class="mobile-nav-item" style="background:none; border:none; cursor:pointer;"
                 onclick="toggleMobileDrawer()">
                 <i class="fa-solid fa-ellipsis-vertical"></i><span>Mais</span>
@@ -143,7 +138,7 @@
     </div>
 
     <script src="script/script.js"></script>
-    <!-- Modal de Gestão de IBANs -->
+
     <div id="iban-modal"
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
         <div class="form-card"
@@ -154,7 +149,6 @@
                 <i class="fa-solid fa-xmark" onclick="closeIbanModal()" style="cursor: pointer; color: #64748b;"></i>
             </h4>
 
-            <!-- Formulário para Adicionar -->
             <div
                 style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
                 <div class="form-field">
@@ -171,11 +165,12 @@
                 </button>
             </div>
 
-            <!-- Lista para Remover -->
             <p style="font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 10px;">IBANs Registados:</p>
             <div id="modal-iban-list"
                 style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
+    </div>
+
 </body>
 
 </html>

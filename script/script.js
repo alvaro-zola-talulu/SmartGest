@@ -454,7 +454,10 @@ function executeClientDelete() {
         showClientAlert("Eliminado", `O cliente "${nomeRemovido}" foi removido do sistema.`, true);
     }
 }
-// SISTEMA DE EFETUAR VENDAS
+// ==========================================
+// SISTEMA DE EFETUAR VENDAS & DASHBOARD
+// ==========================================
+
 function renderVendasFormOptions() {
     const clientSelect = document.getElementById('sale-client-select');
     const prodSelect = document.getElementById('sale-product-select');
@@ -487,6 +490,37 @@ function updateSaleTotal() {
     }
 }
 
+// ALERTA INTERNO DINÂMICO PARA VENDAS
+function showSaleAlert(title, message, isSuccess = false) {
+    const modal = document.getElementById('sale-alert-modal');
+    const iconDiv = document.getElementById('sale-alert-icon');
+    const titleH3 = document.getElementById('sale-alert-title');
+    const messageP = document.getElementById('sale-alert-message');
+    const btn = document.getElementById('sale-alert-btn');
+
+    if (!modal) return;
+
+    titleH3.innerText = title;
+    messageP.innerText = message;
+
+    if (isSuccess) {
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        iconDiv.style.color = "#22c55e";
+        btn.style.background = "#22c55e";
+    } else {
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        iconDiv.style.color = "#ef4444";
+        btn.style.background = "#2563eb";
+    }
+
+    modal.style.display = "flex";
+}
+
+function closeSaleAlertModal() {
+    const modal = document.getElementById('sale-alert-modal');
+    if (modal) modal.style.display = "none";
+}
+
 function registerSale(event) {
     if(event) event.preventDefault();
 
@@ -495,7 +529,7 @@ function registerSale(event) {
     const qty = parseInt(document.getElementById('sale-qty').value) || 0;
 
     if(clientIdx === "" || prodIdx === "" || qty <= 0) {
-        alert("Selecione o cliente, o produto e defina uma quantidade válida!");
+        showSaleAlert("Dados Incompletos", "Por favor, selecione o cliente, o produto e defina uma quantidade válida!", false);
         return;
     }
 
@@ -503,7 +537,7 @@ function registerSale(event) {
     const clienteSelecionado = clientes[clientIdx];
 
     if(qty > produtoSelecionado.stock) {
-        alert(`Stock insuficiente! Apenas tem ${produtoSelecionado.stock} unidades disponíveis de ${produtoSelecionado.nome}.`);
+        showSaleAlert("Stock Insuficiente", `Operação cancelada! Apenas tens ${produtoSelecionado.stock} unidades disponíveis de "${produtoSelecionado.nome}".`, false);
         return;
     }
 
@@ -524,13 +558,13 @@ function registerSale(event) {
         produto: produtoSelecionado.nome,
         quantidade: qty,
         total: totalVenda,
-        lucro: lucroLiquido
+        lucru: lucroLiquido
     };
 
     vendas.unshift(novaVenda);
     persistData();
 
-    alert("Venda realizada com sucesso!");
+    showSaleAlert("Venda Concluída!", `Sucesso! A venda para o cliente "${clienteSelecionado.nome}" foi processada.`, true);
     
     document.getElementById('sale-product-select').value = "";
     document.getElementById('sale-qty').value = "1";
@@ -562,32 +596,33 @@ function renderDashboardEInsights() {
     document.getElementById('dash-receita-total').innerText = totalDinheiroHoje.toLocaleString('pt-PT') + " Kz";
 
     const lowStockList = document.getElementById('dash-low-stock-list');
-    lowStockList.innerHTML = "";
-    let contagemBaixoStock = 0;
+    if (lowStockList) {
+        lowStockList.innerHTML = "";
+        let contagemBaixoStock = 0;
+        const iconColors = ["bg-danger-icon", "bg-warning-icon", "bg-info-icon"];
 
-    const iconColors = ["bg-danger-icon", "bg-warning-icon", "bg-info-icon"];
-
-    produtos.forEach(p => {
-        if(p.stock <= 3) {
-            let classeCor = iconColors[contagemBaixoStock % iconColors.length];
-            contagemBaixoStock++;
-            
-            lowStockList.innerHTML += `
-                <li>
-                    <div class="stock-item-left">
-                        <div class="stock-icon-wrapper ${classeCor}">
-                            <i class="fa-solid fa-box-open" style="font-size:0.85rem;"></i>
+        produtos.forEach(p => {
+            if(p.stock <= 3) {
+                let classeCor = iconColors[contagemBaixoStock % iconColors.length];
+                contagemBaixoStock++;
+                
+                lowStockList.innerHTML += `
+                    <li>
+                        <div class="stock-item-left">
+                            <div class="stock-icon-wrapper ${classeCor}">
+                                <i class="fa-solid fa-box-open" style="font-size:0.85rem;"></i>
+                            </div>
+                            <span style="font-weight: 600; color:#334155;">${p.nome}</span>
                         </div>
-                        <span style="font-weight: 600; color:#334155;">${p.nome}</span>
-                    </div>
-                    <strong style="color: #ef4444; font-size:0.9rem;">${p.stock} ${p.stock === 1 ? 'unidade' : 'unidades'}</strong>
-                </li>
-            `;
-        }
-    });
+                        <strong style="color: #ef4444; font-size:0.9rem;">${p.stock} ${p.stock === 1 ? 'unidade' : 'unidades'}</strong>
+                    </li>
+                `;
+            }
+        });
 
-    if(contagemBaixoStock === 0) {
-        lowStockList.innerHTML = "<li><span class='text-green' style='font-size:0.9rem;'><i class='fa-solid fa-circle-check'></i> Todo o inventário está seguro!</span></li>";
+        if(contagemBaixoStock === 0) {
+            lowStockList.innerHTML = "<li><span class='text-green' style='font-size:0.9rem;'><i class='fa-solid fa-circle-check'></i> Todo o inventário está seguro!</span></li>";
+        }
     }
 
     const dataAtual = new Date();
@@ -651,7 +686,9 @@ function renderDashboardEInsights() {
     }
 }
 
+// ==========================================
 // RELATÓRIOS E FATURAÇÃO
+// ==========================================
 function renderRelatorios() {
     const filterInput = document.getElementById('report-month-filter');
     const tbody = document.getElementById('sales-report-table-body');
@@ -696,7 +733,16 @@ function renderRelatorios() {
 
         if(incluirVenda) {
             faturadoTotal += v.total;
-            const lucroItem = v.lucro !== undefined ? v.lucro : Math.round(v.total * 0.25);
+            // Cobertura dupla para mapear corretamente o lucro ('lucro' ou 'lucru')
+            let lucroItem = 0;
+            if (v.lucro !== undefined) {
+                lucroItem = v.lucro;
+            } else if (v.lucru !== undefined) {
+                lucroItem = v.lucru;
+            } else {
+                lucroItem = Math.round(v.total * 0.25);
+            }
+            
             lucroTotal += lucroItem;
             totalTransacoesCount++;
 
@@ -824,4 +870,42 @@ function toggleMobileDrawer() {
         drawer.classList.toggle('active');
         overlay.classList.toggle('active');
     }
+}
+
+// ==========================================
+// DEFINIÇÕES - NOTIFICAÇÃO PROFISSIONAL
+// ==========================================
+function salvarConfiguracoes() {
+    // Cria o elemento da notificação dinamicamente
+    const toast = document.createElement('div');
+    
+    // Aplica os estilos diretamente para garantir a identidade visual do SmartGest
+    toast.style.position = 'fixed';
+    toast.style.top = '20px';
+    toast.style.right = '20px';
+    toast.style.backgroundColor = '#10b981'; // Verde de sucesso do sistema
+    toast.style.color = '#ffffff';
+    toast.style.padding = '12px 24px';
+    toast.style.borderRadius = '8px';
+    toast.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+    toast.style.zIndex = '10000';
+    toast.style.fontWeight = '600';
+    toast.style.fontSize = '0.9rem';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'center';
+    toast.style.gap = '8px';
+    toast.style.transition = 'all 0.3s ease';
+    
+    // Ícone do FontAwesome e texto
+    toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> Definições guardadas com sucesso!`;
+    
+    // Adiciona ao corpo da página
+    document.body.appendChild(toast);
+    
+    // Remove suavemente após 3 segundos
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
 }
