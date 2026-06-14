@@ -43,7 +43,8 @@ window.onload = function() {
     const path = window.location.pathname;
     const paginaAtual = path.substring(path.lastIndexOf('/') + 1);
 
-    if (paginaAtual !== "index.html" && paginaAtual !== "") {
+    // MODIFICADO: Bloqueia a execução do renderHeaderUsuario se estiver no index ou no login
+    if (paginaAtual !== "index.html" && paginaAtual !== "" && paginaAtual !== "login.html") {
         renderHeaderUsuario();
     }
 
@@ -240,14 +241,6 @@ function editProduct(index) {
     document.getElementById('product-form-container').classList.remove('hidden-element');
 }
 
-function deleteProduct(index) {
-    if(confirm(`Tem a certeza que deseja eliminar o produto "${produtos[index].nome}"?`)) {
-        produtos.splice(index, 1);
-        persistData();
-        renderProdutos();
-    }
-}
-
 // GESTÃO DE CLIENTES
 function renderClientes() {
     const tbody = document.getElementById('clients-table-body');
@@ -283,7 +276,6 @@ function closeClientModal() {
     document.getElementById('client-form-container').classList.add('hidden-element');
 }
 
-// Salva o cliente editado ou criado
 function saveClient() {
     const nome = document.getElementById('cli-nome').value.trim();
     const telefone = document.getElementById('cli-telefone').value.trim();
