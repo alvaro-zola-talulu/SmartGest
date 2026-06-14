@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 150" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente com dominância de Azuis (Confiança e Tecnologia) -->
+    <linearGradient id="gradienteAzulDominante" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e40af" /> <!-- Azul Royal Profundo -->
+      <stop offset="100%" stop-color="#06b6d4" /> <!-- Azul Ciano Fluido -->
+    </linearGradient>
+  </defs>
+
+  <!-- ISOTIPO: Conexão Humana e Gestão em Tons de Azul -->
+  <g transform="translate(20, 25)">
+    <!-- Linhas fluidas humanistas -->
+    <path d="M30,80 Q45,40 60,80 T90,80" fill="none" stroke="url(#gradienteAzulDominante)" stroke-width="8" stroke-linecap="round"/>
+    <path d="M45,65 Q60,25 75,65" fill="none" stroke="url(#gradienteAzulDominante)" stroke-width="6" stroke-linecap="round"/>
+    <!-- Nós de união em harmonia azul -->
+    <circle cx="30" cy="80" r="7" fill="#1e40af" />
+    <circle cx="60" cy="80" r="7" fill="#06b6d4" />
+    <circle cx="90" cy="80" r="7" fill="#1e40af" />
+    <circle cx="60" cy="22" r="8" fill="url(#gradienteAzulDominante)" />
+  </g>
+
+  <!-- TEXTO: SmartGest com Nova Cor Dominante -->
+  <g transform="translate(140, 75)">
+    <!-- Nome Principal: Smart em Azul Escuro e Gest em Azul Royal -->
+    <text font-family="'Plus Jakarta Sans', 'Montserrat', 'Segoe UI', sans-serif" font-size="42" font-weight="800" fill="#0f172a">Smart<tspan font-weight="400" fill="#1e40af">Gest</tspan></text>
+    
+    <!-- Slogan / Subtítulo -->
+    <text x="2" y="32" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-size="12" font-weight="600" letter-spacing="6" fill="#64748b">GESTÃO INTELIGENTE</text>
+  </g>
+</svg>
