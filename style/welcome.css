@@ -1,137 +1,19 @@
-/* welcome.css */
-
+/* ==========================================================================
+   ESTRUTURA GERAL DA LANDING PAGE
+   ========================================================================== */
 body {
-    background-color: #f8fafc; /* Mesmo fundo claro e limpo do teu painel */
+    background-color: #f8fafc;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-}
-
-/* Alinhamento central do cartão */
-.welcome-wrapper {
-    width: 100%;
-    max-width: 520px;
-    padding: 20px;
-}
-
-.welcome-card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 40px 30px;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
-    border: 1px solid #e2e8f0;
-    text-align: center;
-}
-
-/* Logótipo e Título */
-.welcome-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 30px;
-}
-
-.welcome-logo-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.welcome-title-text {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #0f172a;
-    letter-spacing: 0.05em;
-}
-
-.welcome-tagline {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #3b82f6; /* O teu azul padrão */
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-/* Texto de Boas-vindas */
-.welcome-body h2 {
-    font-size: 1.35rem;
-    font-weight: 700;
     color: #1e293b;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
-.welcome-body p {
-    color: #64748b;
-    font-size: 0.98rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.dev-credits {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 35px;
-}
-
-.text-blue {
-    color: #3b82f6;
-}
-
-/* Botões de Ação */
-.welcome-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.btn-welcome {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-
-.btn-welcome.primary {
-    background-color: #3b82f6;
-    color: #ffffff;
-    border: none;
-}
-
-.btn-welcome.primary:hover {
-    background-color: #2563eb;
-}
-
-.btn-welcome.secondary {
-    background-color: transparent;
-    color: #3b82f6;
-    border: 2px solid #3b82f6;
-}
-
-.btn-welcome.secondary:hover {
-    background-color: #eff6ff;
-}
-
-/* Transição de entrada idêntica à do teu painel principal */
-.animacao-entrada {
-    animation: fadeIn 0.4s ease-out;
+/* Reutilização da tua animação original de entrada suave */
+.landing-page {
+    animation: fadeIn 0.5s ease-out;
 }
 
 @keyframes fadeIn {
@@ -145,9 +27,422 @@ body {
     }
 }
 
-/* Responsividade para ecrãs muito pequenos */
-@media (max-width: 400px) {
-    .welcome-card {
-        padding: 30px 15px;
+/* ==========================================================================
+   BARRA DE NAVEGAÇÃO SUPERIOR (Inspirada no modelo bem-vindo.net)
+   ========================================================================== */
+.main-navbar {
+    background-color: #2563eb; /* Azul vivo e corporativo */
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    height: 42px;
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));
+}
+
+.nav-brand-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    color: #bfdbfe;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+    color: #ffffff;
+}
+
+.btn-nav-action {
+    background-color: #ff5722; /* Botão coral/laranja de destaque idêntico à imagem */
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 6px rgba(255, 87, 34, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-nav-action:hover {
+    background-color: #f4511e;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(255, 87, 34, 0.3);
+}
+
+/* ==========================================================================
+   SECÇÃO HERO (Apresentação Principal)
+   ========================================================================== */
+.hero-section {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+    color: #ffffff;
+    padding: 90px 40px;
+    position: relative;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex: 1;
+    min-width: 320px;
+}
+
+.hero-badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 25px;
+}
+
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.hero-title span {
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0.95;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: #bfdbfe;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    font-weight: 400;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-hero.primary {
+    background-color: #10b981; /* Verde "Turbinado" para botões de ação interna */
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-hero.primary:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+}
+
+.btn-hero.secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-hero.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.hero-media {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-main-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ==========================================================================
+   SECÇÃO DE RECURSOS (Grelha de Funcionalidades)
+   ========================================================================== */
+.features-section {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.section-header p {
+    color: #64748b;
+    font-size: 1.05rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: #3b82f6;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 12px 0;
+}
+
+.feature-card p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==========================================================================
+   SECÇÃO CONTEXTO LOCAL (Espaço para Fotos de Angola)
+   ========================================================================== */
+.local-context-section {
+    background-color: #f1f5f9;
+    padding: 80px 20px;
+}
+
+.local-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.local-image-box, .local-text-box {
+    flex: 1;
+    min-width: 320px;
+}
+
+.local-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    object-fit: cover;
+}
+
+.local-text-box h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 20px 0;
+}
+
+.local-text-box p {
+    color: #475569;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==========================================================================
+   ABA DOS DESENVOLVEDORES (Cards de Equipa Modernos)
+   ========================================================================== */
+.team-section {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.team-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.team-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 35px 25px;
+    text-align: center;
+    width: 100%;
+    max-width: 280px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+}
+
+.team-avatar {
+    margin-bottom: 20px;
+}
+
+.team-avatar img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eff6ff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.team-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 6px 0;
+}
+
+.team-role {
+    font-size: 0.85rem;
+    color: #3b82f6;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+}
+
+.team-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.team-social a {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    transition: color 0.2s ease;
+}
+
+.team-social a:hover {
+    color: #2563eb;
+}
+
+/* ==========================================================================
+   RODAPÉ DA PÁGINA (Footer)
+   ========================================================================== */
+.main-footer {
+    background-color: #0f172a;
+    color: #94a3b8;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid #1e293b;
+}
+
+.footer-container p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.footer-container strong {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (Ajustes para Telemóveis)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Oculta o menu central em telemóveis para evitar quebras */
+    }
+    
+    .hero-section {
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .features-section, .team-section {
+        margin: 60px auto;
     }
 }
