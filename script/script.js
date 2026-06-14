@@ -6,17 +6,17 @@ const usuariosPermitidos = {
     "ulisses": { senha: "inevitavel", nome: "Yami Ulísses", inicial: "J" },
 };
 
-// NOVO: Busca o utilizador logado ou define um padrão ("comum") se não encontrar
+// Busca o utilizador logado ou define um padrão ("comum") se não encontrar
 function getUsuarioAtivo() {
     return localStorage.getItem("usuario_logado") || "comum";
 }
 
-// Inicialização das variáveis globais vazias (serão preenchidas dinamicamente)
+// Inicialização das variáveis globais
 let produtos = [];
 let clientes = [];
 let vendas = [];
 
-// NOVO: Carrega os dados isolados do utilizador ativo
+// Carrega os dados isolados do utilizador ativo
 function carregarDadosDoUsuario() {
     const usuario = getUsuarioAtivo();
 
@@ -37,15 +37,16 @@ function carregarDadosDoUsuario() {
 
 // Executado sempre que qualquer página é totalmente carregada
 window.onload = function() {
-    // Garante o carregamento dos dados certos antes de renderizar os ecrãs
+    // 1. Garante o carregamento dos dados certos antes de tudo
     carregarDadosDoUsuario();
 
     const path = window.location.pathname;
     const paginaAtual = path.substring(path.lastIndexOf('/') + 1);
 
-    // MODIFICADO: Bloqueia a execução do renderHeaderUsuario se estiver no index ou no login
+    // 2. Bloqueia a execução do renderHeaderUsuario se estiver no index ou no login
     if (paginaAtual !== "index.html" && paginaAtual !== "" && paginaAtual !== "login.html") {
         renderHeaderUsuario();
+        updateIbanDisplays(); // CORREÇÃO: Executa aqui de forma segura após carregar o usuário
     }
 
     if (paginaAtual === "dashboard.html") {
@@ -54,7 +55,6 @@ window.onload = function() {
     else if (paginaAtual === "produtos.html") {
         renderProdutos();
         
-        // ATIVAÇÃO DA BARRA DE PESQUISA EM TEMPO REAL
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
             searchInput.addEventListener('input', renderProdutos);
@@ -84,17 +84,16 @@ function renderHeaderUsuario() {
         return;
     }
 
-    const elemDisplayName = document.getElementById('user-display-name');
     const elemDropdownName = document.getElementById('dropdown-user-name');
     const elemWelcomeName = document.getElementById('welcome-name');
     const elemAvatar = document.getElementById('user-avatar');
 
-    if (elemDisplayName) elemDisplayName.innerText = usuarioLogado.nome;
     if (elemDropdownName) elemDropdownName.innerText = usuarioLogado.nome;
     if (elemWelcomeName) elemWelcomeName.innerText = usuarioLogado.nome;
     if (elemAvatar) elemAvatar.innerText = usuarioLogado.inicial;
 }
 
+// Fechar Dropdown ao clicar fora
 window.addEventListener('click', function(e) {
     const dropdown = document.getElementById('profile-dropdown-menu');
     const profileBtn = document.querySelector('.user-profile');
@@ -109,7 +108,7 @@ function toggleProfileDropdown(event) {
     if (dropdown) dropdown.classList.toggle('show');
 }
 
-// AJUSTADO: Persiste os dados na chave única do utilizador logado
+// Persiste os dados na chave única do utilizador logado
 function persistData() {
     const usuario = getUsuarioAtivo();
     localStorage.setItem(`vendas_produtos_${usuario}`, JSON.stringify(produtos));
@@ -128,8 +127,6 @@ function handleLogin(event) {
         if (errorDiv) errorDiv.classList.add('hidden');
         
         sessionStorage.setItem('usuario_sessao', JSON.stringify(usuariosPermitidos[userIn]));
-        
-        // Guarda o nome exato do utilizador que entrou para isolar os dados
         localStorage.setItem('usuario_logado', userIn);
         
         window.location.href = 'dashboard.html';
@@ -194,7 +191,6 @@ function openProductModal() {
     clearProductForm();
 }
 
-// Fecha o modal de produtos
 function closeProductModal() { 
     document.getElementById('product-form-container').classList.add('hidden-element'); 
 }
@@ -241,6 +237,15 @@ function editProduct(index) {
     document.getElementById('product-form-container').classList.remove('hidden-element');
 }
 
+// ADICIONADO: Função que estava em falta para evitar erro ao clicar no botão de apagar produto
+function deleteProduct(index) {
+    if(confirm(`Tem a certeza que deseja eliminar o produto "${produtos[index].nome}"?`)) {
+        produtos.splice(index, 1);
+        persistData();
+        renderProdutos();
+    }
+}
+
 // GESTÃO DE CLIENTES
 function renderClientes() {
     const tbody = document.getElementById('clients-table-body');
@@ -276,24 +281,20 @@ function closeClientModal() {
     document.getElementById('client-form-container').classList.add('hidden-element');
 }
 
+// Validação melhorada de campos vazios
 function saveClient() {
     const nome = document.getElementById('cli-nome').value.trim();
     const telefone = document.getElementById('cli-telefone').value.trim();
     const index = document.getElementById('client-edit-index').value;
 
+    if (!nome || !telefone) {
+        alert("Preencha todos os campos do cliente!");
+        return;
+    }
+
     if (telefone.length !== 9) {
         alert("Erro: O número de telefone tem de ter obrigatoriamente 9 dígitos!");
         document.getElementById('cli-telefone').focus();
-        return;
-    }
-
-    if (nome === "") {
-        alert("Por favor, preencha o nome do cliente.");
-        return;
-    }
-
-    if(!nome || !telefone) {
-        alert("Preencha todos os campos do cliente!");
         return;
     }
 
@@ -340,6 +341,7 @@ function renderVendasFormOptions() {
     produtos.forEach((p, idx) => { prodSelect.innerHTML += `<option value="${idx}">${p.nome} (Dispo: ${p.stock})</option>`; });
 }
 
+// Atualiza totais na tela de venda
 function updateSaleTotal() {
     const selectElem = document.getElementById('sale-product-select');
     if (!selectElem) return;
@@ -410,7 +412,7 @@ function registerSale(event) {
     updateSaleTotal();
 }
 
-// AUTOMATIZAÇÃO REAL DO DASHBOARD E AUTOMATIZAÇÃO DO GRÁFICO SVG
+// DASHBOARD E GRÁFICO SVG
 function renderDashboardEInsights() {
     const pQtd = document.getElementById('dash-produtos-qtd');
     const cQtd = document.getElementById('dash-clientes-qtd');
@@ -462,6 +464,7 @@ function renderDashboardEInsights() {
         lowStockList.innerHTML = "<li><span class='text-green' style='font-size:0.9rem;'><i class='fa-solid fa-circle-check'></i> Todo o inventário está seguro!</span></li>";
     }
 
+    // Geração do gráfico semanal baseado nas datas reais
     const dataAtual = new Date();
     const diaSemanaAtual = dataAtual.getDay(); 
     
@@ -550,15 +553,19 @@ function renderRelatorios() {
         if(filtroSelecionado === "ALL") {
             incluirVenda = true;
         } else {
-            let mesVenda;
+            let mesVenda = -1;
+            // OTIMIZAÇÃO: Prioriza sempre usar o timestamp guardado para o cálculo do mês de forma segura
             if (v.timestamp) {
                 mesVenda = new Date(v.timestamp).getMonth();
-            } else {
+            } else if (v.data) {
                 try {
-                    const partesData = v.data.split(' ')[0].split('/');
-                    mesVenda = parseInt(partesData[1]) - 1;
+                    // Fallback estruturado para datas antigas ou sem timestamp
+                    const partesData = v.data.split(' ')[0];
+                    const caractereDivisao = partesData.includes('/') ? '/' : '-';
+                    mesVenda = parseInt(partesData.split(caractereDivisao)[1]) - 1;
                 } catch(e) { mesVenda = -1; }
             }
+            
             if(mesVenda === parseInt(filtroSelecionado)) {
                 incluirVenda = true;
             }
@@ -592,12 +599,7 @@ function renderRelatorios() {
     }
 }
 
-// Executa automaticamente ao carregar qualquer página para listar os IBANs no Dropdown
-document.addEventListener("DOMContentLoaded", () => {
-    updateIbanDisplays();
-});
-
-// AJUSTADO: Busca os IBANs salvos EXCLUSIVOS do utilizador logado
+// GERENCIAMENTO DE IBANS EXCLUSIVOS
 function getIbans() {
     const usuario = getUsuarioAtivo();
     const ibans = localStorage.getItem(`ibans_${usuario}`);
@@ -616,7 +618,7 @@ function updateIbanDisplays() {
         if (ibans.length === 0) {
             dropdownList.innerHTML = `<p style="font-size: 0.8rem; color: #94a3b8; font-style: italic; margin-top: 5px;">Nenhum IBAN registado.</p>`;
         } else {
-            dropdownList.innerHTML = ibans.map((item, index) => `
+            dropdownList.innerHTML = ibans.map((item) => `
                 <div class="iban-item" style="margin-bottom: 8px; font-size: 0.85rem;">
                     <span class="iban-label" style="font-weight: 700; display: block; color: #64748b;">${item.banco}:</span>
                     <span class="iban-value" style="word-break: break-all; color: #1e293b;">${item.numero}</span>
@@ -630,7 +632,7 @@ function updateIbanDisplays() {
             modalList.innerHTML = `<p style="font-size: 0.85rem; color: #94a3b8; text-align: center;">Nenhum IBAN adicionado.</p>`;
         } else {
             modalList.innerHTML = ibans.map((item, index) => `
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 8px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 5px;">
                     <div style="font-size: 0.8rem; max-width: 80%;">
                         <strong style="color: #1e293b;">${item.banco}</strong><br>
                         <span style="color: #64748b; font-family: monospace;">${item.numero}</span>
@@ -692,11 +694,11 @@ function removeIban(index) {
     }
 }
 
-// Função para abrir e fechar a gaveta de links (3 pontos) no Mobile
-    function toggleMobileDrawer() {
-        const drawer = document.getElementById('mobile-drawer');
-        const overlay = document.getElementById('drawer-overlay');
-        
+function toggleMobileDrawer() {
+    const drawer = document.getElementById('mobile-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    if (drawer && overlay) {
         drawer.classList.toggle('active');
         overlay.classList.toggle('active');
     }
+}
