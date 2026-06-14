@@ -306,7 +306,13 @@ function closeProductAlertModal() {
     if(modal) modal.style.display = 'none';
 }
 
+// ==========================================
 // GESTÃO DE CLIENTES
+// ==========================================
+
+// Variável global temporária para controlar qual cliente apagar através do modal
+let clientIndexToDelete = null;
+
 function renderClientes() {
     const tbody = document.getElementById('clients-table-body');
     if (!tbody) return;
@@ -317,9 +323,9 @@ function renderClientes() {
             <tr>
                 <td>${cli.nome}</td>
                 <td>${cli.telefone}</td>
-                <td>
+                <td style="text-align: center;">
                     <button class="btn-edit" onclick="editClient(${index})"><i class="fa-solid fa-pencil"></i></button>
-                    <button class="btn-delete" onclick="deleteClient(${index})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-delete" onclick="openDeleteClientModal(${index})"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -341,18 +347,49 @@ function closeClientModal() {
     document.getElementById('client-form-container').classList.add('hidden-element');
 }
 
+// ALERTA PERSONALIZADO PARA CLIENTES
+function showClientAlert(title, message, isSuccess = false) {
+    const modal = document.getElementById('client-alert-modal');
+    const iconDiv = document.getElementById('client-alert-icon');
+    const titleH3 = document.getElementById('client-alert-title');
+    const messageP = document.getElementById('client-alert-message');
+    const btn = document.getElementById('client-alert-btn');
+
+    if (!modal) return;
+
+    titleH3.innerText = title;
+    messageP.innerText = message;
+
+    if (isSuccess) {
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        iconDiv.style.color = "#22c55e"; // Verde
+        btn.style.background = "#22c55e";
+    } else {
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        iconDiv.style.color = "#ef4444"; // Vermelho
+        btn.style.background = "#2563eb"; // Azul padrão
+    }
+
+    modal.style.display = "flex";
+}
+
+function closeClientAlertModal() {
+    const modal = document.getElementById('client-alert-modal');
+    if (modal) modal.style.display = "none";
+}
+
 function saveClient() {
     const nome = document.getElementById('cli-nome').value.trim();
     const telefone = document.getElementById('cli-telefone').value.trim();
     const index = document.getElementById('client-edit-index').value;
 
     if (!nome || !telefone) {
-        alert("Preencha todos os campos do cliente!");
+        showClientAlert("Campos Vazios", "Por favor, preencha todos os campos do cliente antes de guardar.", false);
         return;
     }
 
     if (telefone.length !== 9) {
-        alert("Erro: O número de telefone tem de ter obrigatoriamente 9 dígitos!");
+        showClientAlert("Telefone Inválido", "Erro: O número de telefone tem de ter obrigatoriamente 9 dígitos!", false);
         document.getElementById('cli-telefone').focus();
         return;
     }
@@ -360,8 +397,10 @@ function saveClient() {
     const item = { nome, telefone };
     if(index === "") {
         clientes.push(item);
+        showClientAlert("Sucesso!", `O cliente "${nome}" foi registado com sucesso.`, true);
     } else {
         clientes[index] = item;
+        showClientAlert("Atualizado!", `Os dados do cliente "${nome}" foram atualizados.`, true);
     }
 
     persistData();
@@ -378,14 +417,43 @@ function editClient(index) {
     document.getElementById('client-form-container').classList.remove('hidden-element');
 }
 
-function deleteClient(index) {
-    if(confirm(`Tem a certeza que deseja eliminar o cliente "${clientes[index].nome}"?`)) {
-        clientes.splice(index, 1);
-        persistData();
-        renderClientes();
+// CONTROLADORES DO MODAL DE ELIMINAÇÃO
+function openDeleteClientModal(index) {
+    clientIndexToDelete = index;
+    const modal = document.getElementById('delete-client-modal');
+    const nameSpan = document.getElementById('delete-client-name');
+    const confirmBtn = document.getElementById('confirm-delete-client-btn');
+
+    if (modal && nameSpan) {
+        nameSpan.innerText = clientes[index].nome;
+        modal.style.display = "flex";
+        
+        // Atribui o clique de confirmação diretamente ao botão do modal
+        confirmBtn.onclick = function() {
+            executeClientDelete();
+        };
     }
 }
 
+function closeDeleteClientModal() {
+    const modal = document.getElementById('delete-client-modal');
+    if (modal) modal.style.display = "none";
+    clientIndexToDelete = null;
+}
+
+function executeClientDelete() {
+    if (clientIndexToDelete !== null) {
+        const nomeRemovido = clientes[clientIndexToDelete].nome;
+        clientes.splice(clientIndexToDelete, 1);
+        
+        persistData();
+        renderClientes();
+        closeDeleteClientModal();
+        
+        // Feedback visual rápido de que apagou
+        showClientAlert("Eliminado", `O cliente "${nomeRemovido}" foi removido do sistema.`, true);
+    }
+}
 // SISTEMA DE EFETUAR VENDAS
 function renderVendasFormOptions() {
     const clientSelect = document.getElementById('sale-client-select');
