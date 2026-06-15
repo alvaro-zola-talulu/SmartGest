@@ -25,7 +25,7 @@ ${mensagem}
 =========================================
 `;
 
-    // Cria o ficheiro virtual em memória
+    // Cria o ficheiro virtual em memória (Simulação de envio/armazenamento)
     const blob = new Blob([conteudoFicheiro], { type: 'text/plain;charset=utf-8' });
     const link = document.createElement('a');
     
@@ -38,7 +38,46 @@ ${mensagem}
     link.click();
     document.body.removeChild(link);
 
-    // Feedback visual de sucesso e limpa o formulário
-    alert('Obrigado, ' + nome + '! O seu pedido de suporte foi processado (Ficheiro de texto gerado).');
+    // =========================================================================
+    // NOVO FEEDBACK VISUAL MODERNO (Substituiu o alert antigo de forma elegante)
+    // =========================================================================
+    const toast = document.createElement('div');
+    toast.style.position = 'fixed';
+    toast.style.bottom = '30px';
+    toast.style.right = '30px';
+    toast.style.backgroundColor = '#2563eb'; // Azul Identidade SmartGest
+    toast.style.color = '#ffffff';
+    toast.style.padding = '16px 28px';
+    toast.style.borderRadius = '8px';
+    toast.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+    toast.style.zIndex = '10000';
+    toast.style.fontWeight = '600';
+    toast.style.fontSize = '0.95rem';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'center';
+    toast.style.gap = '12px';
+    toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    toast.style.transform = 'translateY(20px)';
+    toast.style.opacity = '0';
+
+    // Conteúdo com ícone moderno de envio bem-sucedido
+    toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #60a5fa; font-size: 1.2rem;"></i> <span>Obrigado, ${nome}! Pedido processado com sucesso.</span>`;
+
+    document.body.appendChild(toast);
+
+    // Animação de entrada suave (Fade-in + deslizar para cima)
+    setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    }, 50);
+
+    // Limpa o formulário imediatamente para dar sensação de envio concluído
     document.getElementById('suporteForm').reset();
+
+    // Remove a notificação do ecrã automaticamente após 4 segundos
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 400);
+    }, 4000);
 });

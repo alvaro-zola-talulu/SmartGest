@@ -516,9 +516,38 @@ function showSaleAlert(title, message, isSuccess = false) {
     modal.style.display = "flex";
 }
 
-function closeSaleAlertModal() {
+// 1. Deixa a variável global cá fora, sozinha no topo deste bloco
+let vendaSucessoLink = false;
+
+// 2. Função que MOSTRA o alerta (independente e isolada)
+function showSaleAlert(title, message, isSuccess) {
+    document.getElementById('sale-alert-title').innerText = title;
+    document.getElementById('sale-alert-message').innerText = message;
+    
+    // Define o ícone com base no sucesso ou erro
+    const iconEl = document.getElementById('sale-alert-icon');
+    if (iconEl) {
+        iconEl.innerText = isSuccess ? "🎉" : "❌";
+    }
+
+    // Guarda o estado do sucesso para usarmos ao fechar
+    vendaSucessoLink = isSuccess;
+
+    // Mostra o modal no ecrã
     const modal = document.getElementById('sale-alert-modal');
-    if (modal) modal.style.display = "none";
+    if (modal) modal.style.display = 'flex';
+}
+
+// 3. Função que FECHA o alerta e redireciona (independente e isolada)
+function closeSaleAlertModal() {
+    // Esconde o modal com segurança
+    const modal = document.getElementById('sale-alert-modal');
+    if (modal) modal.style.display = 'none';
+
+    // SE a venda foi concluída com sucesso, salta para o Dashboard!
+    if (vendaSucessoLink) {
+        window.location.href = "dashboard.html";
+    }
 }
 
 function registerSale(event) {
@@ -541,6 +570,7 @@ function registerSale(event) {
         return;
     }
 
+    // Deduz o stock do produto
     produtoSelecionado.stock -= qty;
 
     const custoUnitario = produtoSelecionado.custo !== undefined ? produtoSelecionado.custo : Math.round(produtoSelecionado.preco * 0.75);
@@ -561,7 +591,10 @@ function registerSale(event) {
         lucru: lucroLiquido
     };
 
+    // Insere no topo do teu histórico de vendas local
     vendas.unshift(novaVenda);
+    
+    // Atualiza o localStorage global do SmartGest (Stock, Clientes e Vendas)
     persistData();
 
     showSaleAlert("Venda Concluída!", `Sucesso! A venda para o cliente "${clienteSelecionado.nome}" foi processada.`, true);
@@ -570,6 +603,31 @@ function registerSale(event) {
     document.getElementById('sale-qty').value = "1";
     renderVendasFormOptions();
     updateSaleTotal();
+}
+
+// Executa esta função sempre que a página do Dashboard carregar
+function atualizarPainelDashboard() {
+    const historicoGlobal = JSON.parse(localStorage.getItem('smartgest_vendas_global')) || [];
+    
+    let faturamentoTotal = 0;
+    let totalVendasRealizadas = historicoGlobal.length;
+
+    // Soma o campo 'total' de cada objeto de venda guardado
+    historicoGlobal.forEach(venda => {
+        faturamentoTotal += venda.total;
+    });
+
+    // Se tiveres os elementos com estes IDs na tela inicial do dashboard, eles mudam automaticamente!
+    const txtFaturamento = document.getElementById('dashboard-faturamento');
+    const txtTotalVendas = document.getElementById('dashboard-total-vendas');
+
+    if(txtFaturamento) txtFaturamento.innerText = faturamentoTotal.toLocaleString('pt-PT') + " Kz";
+    if(txtTotalVendas) txtTotalVendas.innerText = totalVendasRealizadas;
+}
+
+// Chamar a função ao carregar o ficheiro caso esteja na página certa
+if (document.getElementById('dashboard-faturamento') || document.getElementById('dashboard-total-vendas')) {
+    atualizarPainelDashboard();
 }
 
 // DASHBOARD E GRÁFICO SVG
@@ -909,3 +967,40 @@ function salvarConfiguracoes() {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+
+// Função autónoma para calcular e desenhar as métricas no Dashboard do SmartGest
+function renderizarMetricasDashboard() {
+    // 1. Tenta capturar os teus arrays de dados globais (vendas, produtos, clientes)
+    // Se por acaso os arrays locais do script estiverem vazios, lê do localStorage
+    const listaVendas = (typeof vendas !== 'undefined' && vendas.length > 0) ? vendas : (JSON.parse(localStorage.getItem('smartgest_vendas')) || []);
+    const listaProdutos = (typeof produtos !== 'undefined' && produtos.length > 0) ? produtos : (JSON.parse(localStorage.getItem('smartgest_produtos')) || []);
+    const listaClientes = (typeof clientes !== 'undefined' && clientes.length > 0) ? clientes : (JSON.parse(localStorage.getItem('smartgest_clientes')) || []);
+
+    let receitaTotal = 0;
+    let qtdVendasHoje = listaVendas.length;
+
+    // 2. Calcula a receita total acumulada somando o valor de cada venda
+    listaVendas.forEach(venda => {
+        receitaTotal += parseFloat(venda.total || 0);
+    });
+
+    // 3. Mapeia os IDs exatos encontrados no teu HTML
+    const elVendasQtd = document.getElementById('dash-vendas-qtd');
+    const elReceitaTotal = document.getElementById('dash-receita-total');
+    const elProdutosQtd = document.getElementById('dash-produtos-qtd');
+    const elClientesQtd = document.getElementById('dash-clientes-qtd');
+
+    // 4. Atualiza os componentes visuais caso existam no ecrã atual
+    if (elVendasQtd) elVendasQtd.innerText = qtdVendasHoje;
+    if (elReceitaTotal) elReceitaTotal.innerText = receitaTotal.toLocaleString('pt-PT') + " Kz";
+    if (elProdutosQtd) elProdutosQtd.innerText = listaProdutos.length;
+    if (elClientesQtd) elClientesQtd.innerText = listaClientes.length;
+}
+
+// Executa a atualização automaticamente sempre que o dashboard.html terminar de carregar o DOM
+document.addEventListener("DOMContentLoaded", function() {
+    // Verifica se os elementos do dashboard estão presentes na página ativa
+    if (document.getElementById('dash-receita-total') || document.getElementById('dash-vendas-qtd')) {
+        renderizarMetricasDashboard();
+    }
+});
