@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
             produto: "Arroz Agulha (Saco 25kg)",
             importador: "Aliança Grossista, Kikolo",
             precoNormalNum: 18500,
-            escaloes: { base: 15500, bronze: 14200, ouro: 13200 }, 
-            quantidadeAtual: 95, // Começa quase cheio para testar o fecho rápido!
+            escaloes: { base: 15500, bronze: 14200, ouro: 13200 },
+            quantidadeAtual: 95,
             quantidadeMeta: 100,
             unidade: "sacos",
             empresasParticipantes: 6,
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             importador: "Central de Materiais Viana",
             precoNormalNum: 6200,
             escaloes: { base: 5400, bronze: 5100, ouro: 4800 },
-            quantidadeAtual: 500, // Já começa 100% FECHADO para demonstração imediata
+            quantidadeAtual: 500,
             quantidadeMeta: 500,
             unidade: "sacos",
             empresasParticipantes: 8,
@@ -60,30 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const gridLista = document.getElementById('grupos-lista');
-    
-    // MODIFICAÇÃO: Injetar o botão dinâmico centralizado abaixo do título da secção
+
+    // Injetar o botão "Propor Novo Grupo" alinhado à direita antes da Grid
     const containerPrincipal = gridLista.parentElement;
     if (containerPrincipal && !document.getElementById('btn-criar-kixiquila')) {
         const wrapperBotao = document.createElement('div');
-        // Alinhamento flexbox centralizado com margens controladas para respirar no layout
-        wrapperBotao.style.cssText = "display: flex; justify-content: center; margin: 15px 0 30px 0; width: 100%;";
+        // Alterado de justify-content: center para flex-end para alinhar à direita
+        wrapperBotao.style.cssText = "display: flex; justify-content: flex-end; margin-bottom: 25px; width: 100%;";
         wrapperBotao.innerHTML = `
             <button id="btn-criar-kixiquila" style="background-color: #1e3a8a; color: white; border: none; padding: 12px 24px; font-weight: 600; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: background 0.2s;">
                 <i class="fa-solid fa-circle-plus"></i> Propor Novo Grupo de Kixiquila
             </button>
         `;
-        
-        // Procura de forma inteligente o título h2 ou h1 da secção (ex: "Grupos de Compra em Aberto")
-        const tituloSecao = containerPrincipal.querySelector('h2') || containerPrincipal.querySelector('h1');
-        
-        if (tituloSecao) {
-            // Posiciona o elemento imediatamente após o título encontrado
-            tituloSecao.insertAdjacentElement('afterend', wrapperBotao);
-        } else {
-            // Fallback de segurança: insere antes da grid caso mude a estrutura do HTML
-            containerPrincipal.insertBefore(wrapperBotao, gridLista);
-        }
-        
+        containerPrincipal.insertBefore(wrapperBotao, gridLista);
         document.getElementById('btn-criar-kixiquila').addEventListener('click', abrirFormularioCriacao);
     }
 
@@ -91,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function calcularPrecoAtual(grupo) {
         const pct = (grupo.quantidadeAtual / groupMetaPct(grupo));
-        if (pct >= 100) return grupo.escaloes.ouro;
-        if (pct >= 75) return grupo.escaloes.bronze;
+        if (pct >= 100) return group.escaloes.ouro;
+        if (pct >= 75) return group.escaloes.bronze;
         return grupo.escaloes.base;
     }
 
@@ -101,8 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Renderizar os Grupos no Ecrã
     function renderizarGrupos() {
         gridLista.innerHTML = "";
-        
-        // Proteção caso o elemento total-grupos mude ou precise de ser atualizado de forma segura
+
         const txtTotal = document.getElementById('total-grupos');
         if (txtTotal) txtTotal.innerText = gruposCompras.length;
 
@@ -110,11 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const percentagem = Math.min((grupo.quantidadeAtual / grupo.quantidadeMeta) * 100, 100).toFixed(0);
             const precoKixiquilaAtual = calcularPrecoAtual(grupo);
             const estaFechado = parseInt(percentagem) >= 100;
-            
+
             const card = document.createElement('div');
             card.className = "grupo-card";
-            if (estaFechado) card.style.borderColor = "#10b981"; // Borda verde de sucesso para o card fechado
-            
+            if (estaFechado) card.style.borderColor = "#10b981";
+
             card.innerHTML = `
                 <div class="grupo-header">
                     <div style="display:flex; justify-content:space-between; align-items:flex-start; width:100%;">
@@ -209,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         confirmButtonColor: '#2563eb'
                     });
                 }
-                
+
                 renderizarGrupos();
             }
         });
@@ -274,18 +262,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                // Cria o grupo calculando as regras de desconto automaticamente
                 const novoGrupo = {
                     id: gruposCompras.length + 1,
                     produto: dados.produto,
-                    importador: `Proposto por: ${usuarioLogado.nome}`, 
+                    importador: `Proposto por: ${usuarioLogado.nome}`,
                     precoNormalNum: dados.precoNormal,
                     escaloes: {
-                        base: Math.round(dados.precoNormal * 0.85),    // 15% Desconto
-                        bronze: Math.round(dados.precoNormal * 0.78),  // 22% Desconto
-                        ouro: Math.round(dados.precoNormal * 0.70)     // 30% Desconto Máximo
+                        base: Math.round(dados.precoNormal * 0.85),
+                        bronze: Math.round(dados.precoNormal * 0.78),
+                        ouro: Math.round(dados.precoNormal * 0.70)
                     },
-                    quantidadeAtual: 1, // O criador entra logo com 1 unidade inicial
+                    quantidadeAtual: 1,
                     quantidadeMeta: dados.meta,
                     unidade: dados.unidade,
                     empresasParticipantes: 1,
@@ -294,10 +281,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
 
                 gruposCompras.push(novoGrupo);
-                
+
                 Swal.fire({
                     icon: 'success',
-                    title: 'Grupo Published!',
+                    title: 'Grupo Publicado!',
                     text: `A sua proposta de compra para "${dados.produto}" foi integrada na rede do SmartGest.`,
                     confirmButtonColor: '#1e3a8a'
                 });
