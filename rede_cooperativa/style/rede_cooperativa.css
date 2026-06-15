@@ -190,7 +190,7 @@ body {
     font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.5;
-    margin-bottom: auto; /* Empurra o link para a base */
+    margin-bottom: auto;
 }
 
 .card-link {
@@ -208,24 +208,10 @@ body {
     gap: 10px;
 }
 
-/* CARD DESTAQUE - KIXIQUILA */
+/* CARD DESTAQUE - KIXIQUILA (LIMPO E SEM A ESCRITA EM ::BEFORE) */
 .rede-card.highlighted {
     background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
     border: 2px solid var(--accent-blue);
-}
-
-.rede-card.highlighted::before {
-    content: 'DESTAQUE COOPERATIVO';
-    position: absolute;
-    top: 14px;
-    right: -35px;
-    background-color: #f59e0b; /* Laranja/Ouro */
-    color: var(--white);
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 4px 35px;
-    transform: rotate(45deg);
-    letter-spacing: 0.5px;
 }
 
 .rede-card.highlighted .card-icon {
@@ -249,29 +235,12 @@ body {
     }
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 640px) {
-    .rede-header {
-        padding: 16px 20px;
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-    }
-    .header-left {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .rede-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* =========================================================================
-   RESPONSIVIDADE OTINIZADA PARA MOBILE - SMARTGEST
+   RESPONSIVIDADE HORIZONTAL COMPACTA PARA MOBILE (MÁXIMO 768px)
    ========================================================================= */
 
 @media (max-width: 768px) {
-    /* Mantém o cabeçalho compacto na horizontal */
+    /* Mantém o cabeçalho compacto na horizontal para poupar ecrã */
     .rede-header {
         padding: 12px 16px;
         flex-direction: row;
@@ -279,36 +248,27 @@ body {
         gap: 8px;
     }
 
-    /* Ajusta o agrupamento da esquerda para não quebrar em linhas */
     .header-left {
         gap: 12px;
         flex-direction: row;
     }
 
-    /* Reduz o botão de voltar para caber em ecrãs pequenos */
     .btn-voltar {
         padding: 6px 10px;
         font-size: 0.8rem;
         border-radius: 6px;
     }
-    
-    /* Esconde o texto "Voltar ao Sistema" mantendo apenas o ícone e "Voltar" se necessário */
-    .btn-voltar span {
-        display: none; /* Caso queiras esconder o texto longo */
-    }
 
-    /* Diminui o título principal para não empurrar os elementos */
     .header-left h1 {
         font-size: 1.1rem;
     }
 
-    /* Torna o perfil mais discreto */
     .user-profile {
         padding: 4px 8px;
         gap: 6px;
     }
 
-    /* Esconde o nome do utilizador em telemóveis para focar no espaço limpo */
+    /* Oculta o nome do utilizador focando apenas no círculo do avatar */
     #user-display-name {
         display: none;
     }
@@ -319,7 +279,6 @@ body {
         font-size: 0.85rem;
     }
 
-    /* Ajustes na introdução da página */
     .rede-container {
         margin: 20px auto;
     }
@@ -332,23 +291,19 @@ body {
         font-size: 0.95rem;
     }
 
-    /* Força os cards a ocupar a largura total do ecrã mobile */
+    /* Ajuste estrutural do Grid para dispositivos móveis */
     .rede-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
     
     .rede-card {
-        padding: 20px;
+        padding: 24px;
     }
 }
 
-/* Ajuste extra para telemóveis muito pequenos (ex: iPhone SE) */
+/* Ajuste extra para ecrãs ultra pequenos (MÁXIMO 380px) */
 @media (max-width: 380px) {
-    .header-left h1 span {
-        display: none; /* Oculte palavras longas do título se o ecrã for minúsculo */
-    }
-    
     .btn-voltar {
         padding: 6px 8px;
     }
