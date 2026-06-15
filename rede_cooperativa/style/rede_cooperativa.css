@@ -1,80 +1,113 @@
+/* =========================================================================
+   ESTILO GLOBAL DA REDE COOPERATIVA - SMARTGEST
+   ========================================================================= */
+
 :root {
-    --bg-rede: #f1f5f9;
-    --primary-rede: #059669; /* Verde Sucesso / Cooperativa */
-    --secondary-rede: #4f46e5; /* Índigo União */
-    --text-dark: #0f172a;
-    --text-light: #64748b;
+    --primary-blue: #1e3a8a;       /* Azul Escuro Dominante */
+    --accent-blue: #2563eb;        /* Azul Vivo para Destaques */
+    --light-blue: #eff6ff;         /* Fundo Azul Suave */
+    --text-main: #1e293b;          /* Cinza Escuro Profissional */
+    --text-muted: #64748b;         /* Cinza para Descrições */
+    --bg-page: #f8fafc;            /* Fundo ultra limpo */
     --white: #ffffff;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-shadow: border-box;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-rede);
-    color: var(--text-dark);
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    min-height: 100vh;
 }
 
-/* Header Estilizado */
+/* --- HEADER SUPERIOR --- */
 .rede-header {
-    background: linear-gradient(135deg, var(--primary-rede), var(--secondary-rede));
+    background-color: var(--primary-blue);
     color: var(--white);
-    padding: 15px 30px;
+    padding: 16px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 20px;
-}
-
-.header-left h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
+    gap: 24px;
 }
 
 .btn-voltar {
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--white);
     text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
     font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: background 0.2s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
 }
 
 .btn-voltar:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-2px);
 }
 
-/* Perfil do Topo */
-.user-profile {
+.header-left h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+/* PERFIL DE UTILIZADOR */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 14px;
+    border-radius: 30px;
+}
+
 .avatar {
-    background: var(--white);
-    color: var(--primary-rede);
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
+    background-color: var(--accent-blue);
+    color: var(--white);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 2px solid var(--white);
 }
 
-/* Layout do Painel */
+#user-display-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* --- CONTAINER E INTRO --- */
 .rede-container {
     max-width: 1200px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
 .rede-intro {
@@ -84,224 +117,239 @@ body {
 
 .rede-intro h2 {
     font-size: 2rem;
-    color: var(--text-dark);
-    margin-bottom: 10px;
+    color: var(--primary-blue);
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 .rede-intro p {
-    color: var(--text-light);
     font-size: 1.1rem;
-    max-width: 600px;
+    color: var(--text-muted);
+    max-width: 700px;
     margin: 0 auto;
+    line-height: 1.6;
 }
 
-/* Grid de Cards */
+/* --- GRID DE CARDS --- */
 .rede-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 50px;
 }
 
-/* Design dos Cartões de Links */
+/* CARD PADRÃO */
 .rede-card {
-    background: var(--white);
-    padding: 30px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: var(--text-dark);
+    background-color: var(--white);
     border: 1px solid #e2e8f0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    padding: 32px;
+    text-decoration: none;
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.006);
 }
 
 .rede-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    border-color: var(--primary-rede);
-}
-
-/* Destaque para a Kixiquila */
-.rede-card.highlighted {
-    border: 2px solid var(--secondary-rede);
-    background: linear-gradient(to bottom right, #ffffff, #fafafa);
+    box-shadow: 0 12px 20px -3px rgba(30, 58, 138, 0.08);
+    border-color: #cbd5e1;
 }
 
 .card-icon {
-    font-size: 2rem;
-    color: var(--primary-rede);
+    width: 54px;
+    height: 54px;
+    background-color: var(--light-blue);
+    color: var(--accent-blue);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     margin-bottom: 20px;
+    transition: var(--transition);
 }
 
-.rede-card.highlighted .card-icon {
-    color: var(--secondary-rede);
+.rede-card:hover .card-icon {
+    background-color: var(--accent-blue);
+    color: var(--white);
 }
 
 .rede-card h3 {
-    margin: 0 0 10px 0;
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--primary-blue);
 }
 
 .rede-card p {
-    color: var(--text-light);
     font-size: 0.95rem;
+    color: var(--text-muted);
     line-height: 1.5;
-    margin: 0 0 20px 0;
-    flex-grow: 1;
+    margin-bottom: auto; /* Empurra o link para a base */
 }
 
 .card-link {
+    margin-top: 24px;
     font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--primary-rede);
+    font-weight: 700;
+    color: var(--accent-blue);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+    transition: var(--transition);
 }
 
-.rede-card.highlighted .card-link {
-    color: var(--secondary-rede);
+.rede-card:hover .card-link {
+    gap: 10px;
 }
 
-/* Animação Fade-In */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* CARD DESTAQUE - KIXIQUILA */
+.rede-card.highlighted {
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
+    border: 2px solid var(--accent-blue);
 }
+
+.rede-card.highlighted::before {
+    content: 'DESTAQUE COOPERATIVO';
+    position: absolute;
+    top: 14px;
+    right: -35px;
+    background-color: #f59e0b; /* Laranja/Ouro */
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 4px 35px;
+    transform: rotate(45deg);
+    letter-spacing: 0.5px;
+}
+
+.rede-card.highlighted .card-icon {
+    background-color: var(--accent-blue);
+    color: var(--white);
+}
+
+/* --- ANIMAÇÃO DE ENTRADA --- */
 .animacao-entrada {
-    animation: fadeIn 0.4s ease-out forwards;
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* ==========================================================================
-   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
-   ========================================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-@media (max-width: 768px) {
-    /* 1. Correção do Cabeçalho */
+/* RESPONSIVIDADE */
+@media (max-width: 640px) {
     .rede-header {
-        padding: 12px 16px;
-        flex-direction: column; /* Transforma o topo em blocos empilhados */
-        align-items: stretch;
+        padding: 16px 20px;
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+    .header-left {
+        flex-direction: column;
         gap: 12px;
     }
+    .rede-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
-    .header-left {
+/* =========================================================================
+   RESPONSIVIDADE OTINIZADA PARA MOBILE - SMARTGEST
+   ========================================================================= */
+
+@media (max-width: 768px) {
+    /* Mantém o cabeçalho compacto na horizontal */
+    .rede-header {
+        padding: 12px 16px;
         flex-direction: row;
-        justify-content: space-between; /* Mantém o botão e o Título alinhados */
-        width: 100%;
-        gap: 10px;
+        justify-content: space-between;
+        gap: 8px;
     }
 
-    .header-left h1 {
-        font-size: 1.2rem; /* Texto ligeiramente menor para não quebrar */
-        order: 1;
+    /* Ajusta o agrupamento da esquerda para não quebrar em linhas */
+    .header-left {
+        gap: 12px;
+        flex-direction: row;
     }
 
+    /* Reduz o botão de voltar para caber em ecrãs pequenos */
     .btn-voltar {
-        font-size: 0.8rem;
         padding: 6px 10px;
-        order: 2; /* Joga o botão para a direita no mobile, facilitando o clique */
+        font-size: 0.8rem;
+        border-radius: 6px;
+    }
+    
+    /* Esconde o texto "Voltar ao Sistema" mantendo apenas o ícone e "Voltar" se necessário */
+    .btn-voltar span {
+        display: none; /* Caso queiras esconder o texto longo */
     }
 
-    /* Move o perfil para baixo do título de forma discreta e alinhada à direita */
-    .rede-header .user-profile {
-        align-self: flex-end;
+    /* Diminui o título principal para não empurrar os elementos */
+    .header-left h1 {
+        font-size: 1.1rem;
+    }
+
+    /* Torna o perfil mais discreto */
+    .user-profile {
+        padding: 4px 8px;
+        gap: 6px;
+    }
+
+    /* Esconde o nome do utilizador em telemóveis para focar no espaço limpo */
+    #user-display-name {
+        display: none;
+    }
+
+    .avatar {
+        width: 32px;
+        height: 32px;
         font-size: 0.85rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 8px;
-        width: 100%;
-        justify-content: flex-end;
     }
 
-    /* Ajustes do Contentor Geral */
+    /* Ajustes na introdução da página */
     .rede-container {
         margin: 20px auto;
     }
 
     .rede-intro h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
-    /* ==========================================================================
-   REGRAS DE RESPONSIVIDADE (MEDIA QUERIES) - VITRINE COMUNITÁRIA
-   ========================================================================== */
-
-@media (max-width: 768px) {
-    /* 1. Correção do Cabeçalho da Rede (Mantido do passo anterior) */
-    .rede-header {
-        padding: 12px 16px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-    .header-left {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        gap: 10px;
-    }
-    .header-left h1 {
-        font-size: 1.2rem;
-    }
-    .btn-voltar {
-        font-size: 0.8rem;
-        padding: 6px 10px;
-    }
-    .rede-header .user-profile {
-        align-self: flex-end;
-        font-size: 0.85rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 8px;
-        width: 100%;
-        justify-content: flex-end;
+    .rede-intro p {
+        font-size: 0.95rem;
     }
 
-    /* 2. Correção Crítica da Vitrine (Barra de Topo) */
-    .vitrine-top-bar {
-        flex-direction: column; /* Empilha o texto e o botão verticalmente */
-        align-items: stretch !important; /* Força ambos a ocupar a largura total */
+    /* Força os cards a ocupar a largura total do ecrã mobile */
+    .rede-grid {
+        grid-template-columns: 1fr;
         gap: 16px;
-        padding: 15px;
-        text-align: left;
     }
-
-    .vitrine-top-bar h2 {
-        font-size: 1.4rem; /* Diminui o título para não quebrar feio */
-        margin-bottom: 6px;
-    }
-
-    .vitrine-top-bar p {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-
-    /* Força o botão "Publicar Produto/Serviço" a ficar centralizado e largo no mobile */
-    .btn-anunciar {
-        width: 100%;
-        padding: 12px;
-        font-size: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-    }
-
-    /* 3. Ajuste da Grelha de Exibição dos Produtos */
-    .vitrine-grid {
-        grid-template-columns: 1fr !important; /* Força os produtos a ficarem um debaixo do outro */
-        gap: 16px;
-        padding: 10px 0;
+    
+    .rede-card {
+        padding: 20px;
     }
 }
 
-@media (max-width: 480px) {
-    .header-left h1 {
-        font-size: 1.1rem;
+/* Ajuste extra para telemóveis muito pequenos (ex: iPhone SE) */
+@media (max-width: 380px) {
+    .header-left h1 span {
+        display: none; /* Oculte palavras longas do título se o ecrã for minúsculo */
     }
-    .rede-container {
-        padding: 0 12px;
+    
+    .btn-voltar {
+        padding: 6px 8px;
     }
 }
