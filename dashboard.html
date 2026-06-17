@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style/drawer.css">
     <link rel="shortcut icon" href="image/logo_smartgest.svg" type="image/x-icon">
     <style>
-        /* Ajustes finos de CSS incorporados para garantir a identidade visual idêntica à imagem */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -61,7 +60,6 @@
             justify-content: center;
         }
 
-        /* Cores e Fundos dos Ícones baseados na Imagem */
         .bg-light-green {
             background-color: #e8f5e9;
             color: #2e7d32;
@@ -82,7 +80,6 @@
             color: #e65100;
         }
 
-        /* Layout em duas colunas (Gráfico / Avisos e Dicas) */
         .dashboard-layout-grid {
             display: grid;
             grid-template-columns: 1.6fr 1fr;
@@ -96,7 +93,6 @@
             }
         }
 
-        /* Estilização Manual da Dica do Dia */
         .dica-card {
             background: #e8f5e9;
             border-radius: 12px;
@@ -142,7 +138,6 @@
             object-fit: contain;
         }
 
-        /* Melhorias visuais na lista de pouco stock */
         .stock-list-card ul {
             list-style: none;
             padding: 0;
@@ -189,7 +184,6 @@
             background-color: #3b82f6;
         }
 
-        /* Links e Botões de Ação estilo Imagem */
         .btn-view-more {
             background: #2563eb;
             color: white;
@@ -288,7 +282,7 @@
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <div class="metric-info">
-                            <p>Vendas Hoje</p>
+                            <p>Vendas de Hoje</p>
                             <h3 id="dash-vendas-qtd">0</h3>
                             <span>Total de vendas</span>
                         </div>
@@ -297,7 +291,7 @@
 
                     <div class="metric-card">
                         <div class="metric-info">
-                            <p>Receita Hoje</p>
+                            <p>Receita de Hoje</p>
                             <h3 id="dash-receita-total">0 Kz</h3>
                             <span>Total ganho</span>
                         </div>
@@ -345,8 +339,8 @@
                                     <line x1="20" y1="150" x2="480" y2="150" stroke="#f1f5f9" stroke-width="1" />
 
                                     <polyline id="chart-polyline" fill="none" stroke="#2563eb" stroke-width="3"
-                                        points="20,150 96,150 172,150 248,150 324,150 400,150 476,150" />
-                                    <g id="chart-dots-group"></g>
+                                        points="20,150 96,150 172,150 248,150 324,150 400,150 476,150">
+                                        <g id="chart-dots-group"></g>
                                 </svg>
                             </div>
                             <div class="chart-labels"
@@ -431,8 +425,6 @@
 
     </div>
 
-    <script src="script/script.js"></script>
-
     <div id="iban-modal"
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
         <div class="form-card"
@@ -464,6 +456,7 @@
                 style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
     </div>
+    <script src="script/script.js"></script>
 </body>
 
 </html>

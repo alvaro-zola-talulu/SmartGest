@@ -31,7 +31,7 @@ body {
 }
 
 /* ==========================================================================
-   8. ESTILOS DA TELA DE LOGIN (SMARTVENDA)
+   2. ESTILOS DA TELA DE LOGIN (SMARTVENDA)
    ========================================================================== */
 .login-container {
     display: flex;
@@ -175,7 +175,7 @@ body {
 .text-blue { color: var(--primary-color); }
 
 /* ==========================================================================
-   2. ESTRUTURA BASE (LAYOUT DASHBOARD)
+   3. ESTRUTURA BASE (LAYOUT DASHBOARD)
    ========================================================================== */
 .dashboard-container {
     display: flex;
@@ -271,7 +271,7 @@ body {
 }
 
 /* ==========================================================================
-   3. CABEÇALHO (TOP HEADER & PROFILE)
+   4. CABEÇALHO (TOP HEADER & PROFILE)
    ========================================================================== */
 .top-header {
     display: flex;
@@ -299,7 +299,7 @@ body {
 .avatar {
     width: 32px;
     height: 32px;
-    background-color: #ff9800; /* Laranja do avatar do João */
+    background-color: #ff9800;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -371,7 +371,7 @@ body {
 }
 
 /* ==========================================================================
-   4. COMPONENTES VISUAIS (CARDS, TABELAS E FORMULÁRIOS)
+   5. COMPONENTES VISUAIS (CARDS, TABELAS E FORMULÁRIOS)
    ========================================================================== */
 .section-header {
     display: flex;
@@ -480,7 +480,7 @@ tr:last-child td {
 }
 
 /* ==========================================================================
-   5. BOTÕES DO SISTEMA
+   6. BOTÕES DO SISTEMA
    ========================================================================== */
 button {
     font-weight: 600;
@@ -550,7 +550,7 @@ button:active {
 .btn-delete:hover { background-color: #ffcdd2; }
 
 /* ==========================================================================
-   6. GRID DE RESUMOS E ALERTAS (DASHBOARD)
+   7. GRID DE RESUMOS E ALERTAS (DASHBOARD)
    ========================================================================== */
 /* Grid de 4 Colunas no Topo */
 .metrics-grid {
@@ -641,7 +641,7 @@ button:active {
 }
 
 /* ==========================================================================
-   7. RESPONSIVIDADE E MENU INFERIOR MOBILE
+   8. RESPONSIVIDADE E MENU INFERIOR MOBILE
    ========================================================================== */
 .mobile-nav {
     display: none; /* Oculto por padrão no Desktop */
@@ -737,7 +737,7 @@ button:active {
 }
 
 /* ==========================================================================
-   CORREÇÃO DE RESPONSIVIDADE PARA A TABELA DE PRODUTOS
+   9. CORREÇÃO DE RESPONSIVIDADE PARA A TABELA DE PRODUTOS
    ========================================================================== */
 
 @media (max-width: 768px) {
@@ -774,7 +774,7 @@ button:active {
 }
 
 /* ==========================================================================
-   AJUSTE DE ESPAÇAMENTO DAS COLUNAS (PRODUTOS E CLIENTES)
+   10. AJUSTE DE ESPAÇAMENTO DAS COLUNAS (PRODUTOS E CLIENTES)
    ========================================================================== */
 
 /* Força a tabela a ocupar apenas o espaço necessário se for maior que o ecrã, 

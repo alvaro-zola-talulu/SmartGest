@@ -28,7 +28,7 @@ body {
 }
 
 /* ==========================================================================
-   BARRA DE NAVEGAÇÃO SUPERIOR (Inspirada no modelo bem-vindo.net)
+   BARRA DE NAVEGAÇÃO SUPERIOR
    ========================================================================== */
 .main-navbar {
     background-color: #2563eb; /* Azul vivo e corporativo */
@@ -184,7 +184,7 @@ body {
 }
 
 .btn-hero.primary {
-    background-color: #10b981; /* Verde "Turbinado" para botões de ação interna */
+    background-color: #10b981;
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
